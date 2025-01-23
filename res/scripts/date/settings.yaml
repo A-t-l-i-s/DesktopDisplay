@@ -1,0 +1,21 @@
+
+timeColor:
+  name: Time Color
+  type: color
+  value: [255, 255, 255, 255]
+  seperator: false
+
+
+dateColor:
+  name: Date Color
+  type: color
+  value: [255, 255, 255, 255]
+  seperator: false
+
+
+secsColor:
+  name: Seconds Color
+  type: color
+  value: [255, 255, 255, 255]
+  seperator: false
+

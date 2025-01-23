@@ -1,0 +1,846 @@
+{
+   <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+   <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+   <void> click: None
+   <method> copy: () -> void
+   <method> drop: (name: str) -> void
+   <method> getattr: (attr: str) -> void
+   <method> hasattr: (attr: str) -> void
+   <method> keyPressEvent: (event: void) -> void
+   <method> keyReleaseEvent: (event: void) -> void
+   <method> leaveEvent: (event: void) -> void
+   <method> lift: (name: str) -> void
+   <method> mouseMoveEvent: (event: void) -> void
+   <method> mousePressEvent: (event: void) -> void
+   <method> mouseReleaseEvent: (event: void) -> void
+   <method> moveEvent: (event: void) -> void
+   <method> paintEvent: (event: void) -> void
+   <method> reloadProperties: () -> void
+   <method> resizeEvent: (event: void) -> void
+   <method> setattr: (attr: str, value: void) -> void
+   <method> startEditing: () -> void
+   <method> stopEditing: () -> void
+   <method> tryattr: (attr: str, ret: void) -> void
+   <pyqtBoundSignal> customContextMenuRequested: void
+   <pyqtBoundSignal> destroyed: void
+   <pyqtBoundSignal> objectNameChanged: void
+   <pyqtBoundSignal> windowIconChanged: void
+   <pyqtBoundSignal> windowIconTextChanged: void
+   <pyqtBoundSignal> windowTitleChanged: void
+   <QFont> dateFont: <PyQt6.QtGui.QFont object at 0x0000020AA9C194D0>
+   <QFont> timeFont: <PyQt6.QtGui.QFont object at 0x0000020AA9C19540>
+   <Scripts_Window_Locked> lockedWidget {
+      <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <method> _clicked: () -> void
+      <method> copy: () -> void
+      <method> drop: (name: str) -> void
+      <method> getattr: (attr: str) -> void
+      <method> hasattr: (attr: str) -> void
+      <method> lift: (name: str) -> void
+      <method> setattr: (attr: str, value: void) -> void
+      <method> tryattr: (attr: str, ret: void) -> void
+      <method> updateIcon: () -> void
+      <pyqtBoundSignal> clicked: void
+      <pyqtBoundSignal> customContextMenuRequested: void
+      <pyqtBoundSignal> destroyed: void
+      <pyqtBoundSignal> objectNameChanged: void
+      <pyqtBoundSignal> pressed: void
+      <pyqtBoundSignal> released: void
+      <pyqtBoundSignal> toggled: void
+      <pyqtBoundSignal> windowIconChanged: void
+      <pyqtBoundSignal> windowIconTextChanged: void
+      <pyqtBoundSignal> windowTitleChanged: void
+      <Scripts_Window> parent <...>
+      <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19AF0>
+   }
+
+   <Scripts_Window_Menu> menuWidget {
+      <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <pyqtBoundSignal> aboutToHide: void
+      <pyqtBoundSignal> aboutToShow: void
+      <pyqtBoundSignal> customContextMenuRequested: void
+      <pyqtBoundSignal> destroyed: void
+      <pyqtBoundSignal> hovered: void
+      <pyqtBoundSignal> objectNameChanged: void
+      <pyqtBoundSignal> triggered: void
+      <pyqtBoundSignal> windowIconChanged: void
+      <pyqtBoundSignal> windowIconTextChanged: void
+      <pyqtBoundSignal> windowTitleChanged: void
+      <method> copy: () -> void
+      <method> drop: (name: str) -> void
+      <method> getattr: (attr: str) -> void
+      <method> hasattr: (attr: str) -> void
+      <method> lift: (name: str) -> void
+      <method> setattr: (attr: str, value: void) -> void
+      <method> tryattr: (attr: str, ret: void) -> void
+   
+      <Scripts_Window_Menu_Move> menuMove {
+         <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <pyqtBoundSignal> aboutToHide: void
+         <pyqtBoundSignal> aboutToShow: void
+         <pyqtBoundSignal> customContextMenuRequested: void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> hovered: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <pyqtBoundSignal> triggered: void
+         <pyqtBoundSignal> windowIconChanged: void
+         <pyqtBoundSignal> windowIconTextChanged: void
+         <pyqtBoundSignal> windowTitleChanged: void
+      
+         <Scripts_Window_Menu_Move_Bottom> actionBottom {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Move> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E70>
+         }
+      
+         <Scripts_Window_Menu_Move_Center> actionCenter {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Move> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19FC0>
+         }
+      
+         <Scripts_Window_Menu_Move_Left> actionLeft {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Move> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19F50>
+         }
+      
+         <Scripts_Window_Menu_Move_Right> actionRight {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Move> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19EE0>
+         }
+      
+         <Scripts_Window_Menu_Move_Top> actionTop {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Move> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E70>
+         }
+      
+         <Scripts_Window_Menu_Move_Vertical> actionVertical {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Move> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19FC0>
+         }
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> mouseReleaseEvent: (event: void) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <Scripts_Window_Menu> parent <...>
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19CB0>
+      }
+   
+      <Scripts_Window_Menu_Properties> menuProperties {
+         <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <pyqtBoundSignal> aboutToHide: void
+         <pyqtBoundSignal> aboutToShow: void
+         <pyqtBoundSignal> customContextMenuRequested: void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> hovered: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <pyqtBoundSignal> triggered: void
+         <pyqtBoundSignal> windowIconChanged: void
+         <pyqtBoundSignal> windowIconTextChanged: void
+         <pyqtBoundSignal> windowTitleChanged: void
+      
+         <Scripts_Window_Menu_Properties_Events> actionEvents {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Properties> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E00>
+         }
+      
+         <Scripts_Window_Menu_Properties_Topmost> actionTopmost {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Properties> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A030>
+         }
+      
+         <Scripts_Window_Menu_Properties_Transparent> actionTransparent {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Properties> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E70>
+         }
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> mouseReleaseEvent: (event: void) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <Scripts_Window_Menu> parent <...>
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19EE0>
+      }
+   
+      <Scripts_Window_Menu_Resize> menuResize {
+         <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <pyqtBoundSignal> aboutToHide: void
+         <pyqtBoundSignal> aboutToShow: void
+         <pyqtBoundSignal> customContextMenuRequested: void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> hovered: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <pyqtBoundSignal> triggered: void
+         <pyqtBoundSignal> windowIconChanged: void
+         <pyqtBoundSignal> windowIconTextChanged: void
+         <pyqtBoundSignal> windowTitleChanged: void
+      
+         <Scripts_Window_Menu_Resize_Fill> actionFill {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Resize> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19D20>
+         }
+      
+         <Scripts_Window_Menu_Resize_Horizontal> actionHorizontal {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Resize> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A030>
+         }
+      
+         <Scripts_Window_Menu_Resize_Horizontal_Cut> actionHorizontalCut {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Resize> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E70>
+         }
+      
+         <Scripts_Window_Menu_Resize_Reset> actionReset {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Resize> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19FC0>
+         }
+      
+         <Scripts_Window_Menu_Resize_Vertical> actionVertical {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Resize> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19D20>
+         }
+      
+         <Scripts_Window_Menu_Resize_Vertical_Cut> actionVerticalCut {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Resize> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A030>
+         }
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> mouseReleaseEvent: (event: void) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <Scripts_Window_Menu> parent <...>
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E00>
+      }
+   
+      <Scripts_Window_Menu_Settings> menuSettings {
+         <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <pyqtBoundSignal> aboutToHide: void
+         <pyqtBoundSignal> aboutToShow: void
+         <pyqtBoundSignal> customContextMenuRequested: void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> hovered: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <pyqtBoundSignal> triggered: void
+         <pyqtBoundSignal> windowIconChanged: void
+         <pyqtBoundSignal> windowIconTextChanged: void
+         <pyqtBoundSignal> windowTitleChanged: void
+      
+         <Scripts_Window_Menu_Settings_Reset> actionReset {
+            <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <method> _triggered: () -> void
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <pyqtBoundSignal> changed: void
+            <pyqtBoundSignal> checkableChanged: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> enabledChanged: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> toggled: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> visibleChanged: void
+            <Scripts_Window_Menu_Settings> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19CB0>
+         }
+         <list> actions: [<engine.scripts.window.menu.settings.item.Scripts_Window_Menu_Settings_Item object at 0x0000020AA9CFCC10>, <engine.scripts.window.menu.settings.item.Scripts_Window_Menu_Settings_Item object at 0x0000020AA9CFCEE0>, <engine.scripts.window.menu.settings.item.Scripts_Window_Menu_Settings_Item object at 0x0000020AA9CFD1B0>]
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> mouseReleaseEvent: (event: void) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <Scripts_Window_Menu> parent <...>
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19FC0>
+      }
+      <Scripts_Window> parent <...>
+      <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19B60>
+   }
+
+   <Window> parent {
+      <EnumType> DockOption: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+   
+      <Window_Canvas> canvas {
+         <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> paintEvent: (event: void) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <pyqtBoundSignal> customContextMenuRequested: void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <pyqtBoundSignal> windowIconChanged: void
+         <pyqtBoundSignal> windowIconTextChanged: void
+         <pyqtBoundSignal> windowTitleChanged: void
+         <Window> parent <...>
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19B60>
+      }
+      <method> copy: () -> void
+      <method> drop: (name: str) -> void
+      <method> exit: () -> void
+      <method> getattr: (attr: str) -> void
+      <method> hasattr: (attr: str) -> void
+      <method> lift: (name: str) -> void
+      <method> restart: () -> void
+      <method> setattr: (attr: str, value: void) -> void
+      <method> tryattr: (attr: str, ret: void) -> void
+      <pyqtBoundSignal> customContextMenuRequested: void
+      <pyqtBoundSignal> destroyed: void
+      <pyqtBoundSignal> iconSizeChanged: void
+      <pyqtBoundSignal> objectNameChanged: void
+      <pyqtBoundSignal> tabifiedDockWidgetActivated: void
+      <pyqtBoundSignal> toolButtonStyleChanged: void
+      <pyqtBoundSignal> windowIconChanged: void
+      <pyqtBoundSignal> windowIconTextChanged: void
+      <pyqtBoundSignal> windowTitleChanged: void
+      <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A030>
+   
+      <Window_SystemTray> systemTray {
+         <EnumType> ActivationReason: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <EnumType> MessageIcon: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+         <method> _activated: (event: void) -> void
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <pyqtBoundSignal> activated: void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> messageClicked: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <Window> parent <...>
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19EE0>
+      
+         <Window_SystemTray_Menu> trayMenu {
+            <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+            <pyqtBoundSignal> aboutToHide: void
+            <pyqtBoundSignal> aboutToShow: void
+            <pyqtBoundSignal> customContextMenuRequested: void
+            <pyqtBoundSignal> destroyed: void
+            <pyqtBoundSignal> hovered: void
+            <pyqtBoundSignal> objectNameChanged: void
+            <pyqtBoundSignal> triggered: void
+            <pyqtBoundSignal> windowIconChanged: void
+            <pyqtBoundSignal> windowIconTextChanged: void
+            <pyqtBoundSignal> windowTitleChanged: void
+         
+            <Window_SystemTray_Menu_Edit> actionEdit {
+               <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <method> _triggered: () -> void
+               <method> copy: () -> void
+               <method> drop: (name: str) -> void
+               <method> getattr: (attr: str) -> void
+               <method> hasattr: (attr: str) -> void
+               <method> lift: (name: str) -> void
+               <method> setattr: (attr: str, value: void) -> void
+               <method> tryattr: (attr: str, ret: void) -> void
+               <pyqtBoundSignal> changed: void
+               <pyqtBoundSignal> checkableChanged: void
+               <pyqtBoundSignal> destroyed: void
+               <pyqtBoundSignal> enabledChanged: void
+               <pyqtBoundSignal> hovered: void
+               <pyqtBoundSignal> objectNameChanged: void
+               <pyqtBoundSignal> toggled: void
+               <pyqtBoundSignal> triggered: void
+               <pyqtBoundSignal> visibleChanged: void
+               <Window_SystemTray_Menu> parent <...>
+               <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A180>
+            }
+         
+            <Window_SystemTray_Menu_Exit> actionExit {
+               <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <method> _triggered: () -> void
+               <method> copy: () -> void
+               <method> drop: (name: str) -> void
+               <method> getattr: (attr: str) -> void
+               <method> hasattr: (attr: str) -> void
+               <method> lift: (name: str) -> void
+               <method> setattr: (attr: str, value: void) -> void
+               <method> tryattr: (attr: str, ret: void) -> void
+               <pyqtBoundSignal> changed: void
+               <pyqtBoundSignal> checkableChanged: void
+               <pyqtBoundSignal> destroyed: void
+               <pyqtBoundSignal> enabledChanged: void
+               <pyqtBoundSignal> hovered: void
+               <pyqtBoundSignal> objectNameChanged: void
+               <pyqtBoundSignal> toggled: void
+               <pyqtBoundSignal> triggered: void
+               <pyqtBoundSignal> visibleChanged: void
+               <Window_SystemTray_Menu> parent <...>
+               <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A2D0>
+            }
+         
+            <Window_SystemTray_Menu_Restart> actionRestart {
+               <EnumType> ActionEvent: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <EnumType> MenuRole: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <EnumType> Priority: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+               <method> _triggered: () -> void
+               <method> copy: () -> void
+               <method> drop: (name: str) -> void
+               <method> getattr: (attr: str) -> void
+               <method> hasattr: (attr: str) -> void
+               <method> lift: (name: str) -> void
+               <method> setattr: (attr: str, value: void) -> void
+               <method> tryattr: (attr: str, ret: void) -> void
+               <pyqtBoundSignal> changed: void
+               <pyqtBoundSignal> checkableChanged: void
+               <pyqtBoundSignal> destroyed: void
+               <pyqtBoundSignal> enabledChanged: void
+               <pyqtBoundSignal> hovered: void
+               <pyqtBoundSignal> objectNameChanged: void
+               <pyqtBoundSignal> toggled: void
+               <pyqtBoundSignal> triggered: void
+               <pyqtBoundSignal> visibleChanged: void
+               <Window_SystemTray_Menu> parent <...>
+               <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A260>
+            }
+            <method> copy: () -> void
+            <method> drop: (name: str) -> void
+            <method> getattr: (attr: str) -> void
+            <method> hasattr: (attr: str) -> void
+            <method> lift: (name: str) -> void
+            <method> setattr: (attr: str, value: void) -> void
+            <method> tryattr: (attr: str, ret: void) -> void
+            <Window_SystemTray> parent <...>
+            <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19F50>
+         }
+      }
+   
+      <Window_Timer> timer {
+         <method> _timeout: () -> void
+         <method> copy: () -> void
+         <method> drop: (name: str) -> void
+         <method> getattr: (attr: str) -> void
+         <method> hasattr: (attr: str) -> void
+         <method> lift: (name: str) -> void
+         <method> setattr: (attr: str, value: void) -> void
+         <method> tryattr: (attr: str, ret: void) -> void
+         <pyqtBoundSignal> destroyed: void
+         <pyqtBoundSignal> objectNameChanged: void
+         <pyqtBoundSignal> timeout: void
+         <Window> parent <...>
+         <int> rate: 30
+         <void> screen: None
+         <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19E00>
+      }
+   }
+
+   <Scripts_Window_Resize> resizeWidget {
+      <EnumType> PaintDeviceMetric: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <EnumType> RenderFlag: (value: void, names: void, module: void, qualname: void, type: void, start: void, boundary: void) -> void
+      <method> copy: () -> void
+      <method> drop: (name: str) -> void
+      <method> getattr: (attr: str) -> void
+      <method> hasattr: (attr: str) -> void
+      <method> lift: (name: str) -> void
+      <method> setattr: (attr: str, value: void) -> void
+      <method> tryattr: (attr: str, ret: void) -> void
+      <pyqtBoundSignal> customContextMenuRequested: void
+      <pyqtBoundSignal> destroyed: void
+      <pyqtBoundSignal> objectNameChanged: void
+      <pyqtBoundSignal> windowIconChanged: void
+      <pyqtBoundSignal> windowIconTextChanged: void
+      <pyqtBoundSignal> windowTitleChanged: void
+      <Scripts_Window> parent <...>
+      <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C1A030>
+   }
+
+   <RFT_Structure> script {
+   
+      <RFT_Structure> config {
+      }
+   
+      <RFT_Structure> settings {
+      
+         <RFT_Structure> dateColor {
+            <str> name: Date Color
+            <str> type: color
+            <bool> seperator: False
+            <list> value: [255, 255, 255, 255]
+         }
+      
+         <RFT_Structure> secsColor {
+            <str> name: Seconds Color
+            <str> type: color
+            <bool> seperator: False
+            <list> value: [255, 255, 255, 255]
+         }
+      
+         <RFT_Structure> timeColor {
+            <str> name: Time Color
+            <str> type: color
+            <bool> seperator: False
+            <list> value: [255, 255, 255, 255]
+         }
+      }
+   
+      <RFT_Structure> table {
+      
+         <RFT_Structure> settings {
+            <list> dateColor: [255, 255, 255, 255]
+            <list> secsColor: [255, 255, 255, 255]
+            <list> timeColor: [255, 255, 255, 255]
+         }
+      }
+   
+      <RFT_Structure> window {
+         <bool> events: False
+         <bool> locked: True
+         <bool> topmost: False
+         <bool> transparent: True
+         <int> height: 80
+         <int> width: 280
+         <int> x: 1140
+         <int> y: 0
+         <str> title: Date
+      }
+      <function> draw: (self: void, painter: void) -> void
+      <function> init: (self: void) -> void
+      <bool> editing: False
+      <void> keyPress: None
+      <void> keyRelease: None
+      <void> mouseMove: None
+      <void> mousePress: None
+      <void> mouseRelease: None
+      <WindowsPath> path: res\scripts\date
+   }
+   <RFT_Structure> settings <...>
+   <QMetaObject> staticMetaObject: <PyQt6.QtCore.QMetaObject object at 0x0000020AA9C19620>
+}

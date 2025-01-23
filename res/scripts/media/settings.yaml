@@ -1,0 +1,72 @@
+
+titleColor:
+  name: Title Color
+  type: color
+  value: [255, 255, 255, 255]
+  seperator: false
+
+artistColor:
+  name: Artist Color
+  type: color
+  value: [255, 255, 255, 255]
+  seperator: true
+
+
+margin:
+  name: Margin
+  type: input
+  value: 6
+  seperator: false
+
+imageSize:
+  name: Image Size
+  type: input
+  value: 300
+  seperator: false
+
+imagePadding:
+  name: Image Padding
+  type: input
+  value: 3
+  seperator: true
+
+
+left:
+  name: Left
+  type: toggle
+  value: false
+  seperator: true
+
+
+experimental:
+  name: Experimental
+  value: null
+  seperator: false
+
+dropShadow:
+  name: Drop Shadow
+  type: toggle
+  value: false
+  seperator: false
+
+dropShadowRadius:
+  name: Drop Shadow Radius
+  type: input
+  value: 50
+  seperator: false
+
+dropShadowX:
+  name: Drop Shadow X
+  type: input
+  value: 0
+  seperator: false
+
+dropShadowY:
+  name: Drop Shadow Y
+  type: input
+  value: 0
+  seperator: false
+
+
+
+
