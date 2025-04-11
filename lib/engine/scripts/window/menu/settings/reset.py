@@ -23,7 +23,7 @@ class Scripts_Window_Menu_Settings_Reset(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Reset")
 
-		self.setIcon(Icons.reset)
+		self.setIcon(Icons.core.reset)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -36,7 +36,7 @@ class Scripts_Window_Menu_Settings_Reset(RFT_Object, QAction):
 	def _triggered(self):
 		for a in self.parent.actions:
 			a.value = a.defaultValue
-			a.settings[a.key] = a.defaultValue
+			a.table[a.key] = a.defaultValue
 
 			if (a.type is not None):
 				a.widget.reload(True)

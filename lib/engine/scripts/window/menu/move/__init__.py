@@ -6,6 +6,8 @@ from .bottom import *
 from .left import *
 from .right import *
 
+from .manual import *
+
 
 
 
@@ -29,7 +31,7 @@ class Scripts_Window_Menu_Move(RFT_Object, QMenu):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setTitle("Move")
 
-		self.setIcon(Icons.move)
+		self.setIcon(Icons.core.move)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -50,6 +52,11 @@ class Scripts_Window_Menu_Move(RFT_Object, QMenu):
 
 		self.actionRight = Scripts_Window_Menu_Move_Right(self)
 		self.addAction(self.actionRight)
+
+		self.addSeparator()
+
+		self.menuManual = Scripts_Window_Menu_Move_Manual(self)
+		self.addMenu(self.menuManual)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

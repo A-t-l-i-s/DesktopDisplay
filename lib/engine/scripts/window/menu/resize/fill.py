@@ -23,7 +23,7 @@ class Scripts_Window_Menu_Resize_Fill(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Fill")
 
-		self.setIcon(Icons.fill)
+		self.setIcon(Icons.core.fill)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -35,7 +35,7 @@ class Scripts_Window_Menu_Resize_Fill(RFT_Object, QAction):
 
 	def _triggered(self):
 		cur = QCursor()
-		screen = QtApp.screenAt(cur.pos())
+		screen = QApplication.screenAt(cur.pos())
 		size = screen.availableGeometry()
 
 		win = self.parent.parent.parent

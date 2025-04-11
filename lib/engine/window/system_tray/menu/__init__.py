@@ -3,6 +3,7 @@ from engine.require import *
 from .actions.exit import *
 from .actions.edit import *
 from .actions.restart import *
+from .actions.settings import *
 
 
 
@@ -25,13 +26,18 @@ class Window_SystemTray_Menu(RFT_Object, QMenu):
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
-		self.setStyleSheet(Styles.menu)
+		self.setStyleSheet(Styles.core.menu)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 		# ~~~~~~~~~~~~ Actions ~~~~~~~~~~~
 		self.actionEdit = Window_SystemTray_Menu_Edit(self)
 		self.addAction(self.actionEdit)
+
+		self.addSeparator()
+		
+		self.actionSettings = Window_SystemTray_Menu_Settings(self)
+		self.addAction(self.actionSettings)
 
 		self.addSeparator()
 

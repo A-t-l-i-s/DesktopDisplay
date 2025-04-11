@@ -23,7 +23,7 @@ class Window_SystemTray(RFT_Object, QSystemTrayIcon):
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
-		self.setIcon(Icons.icon)
+		self.setIcon(Icons.core.icon)
 
 		self.setToolTip("Desktop Display")
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,10 +42,12 @@ class Window_SystemTray(RFT_Object, QSystemTrayIcon):
 
 
 	def _activated(self, event):
-		if (event == QSystemTrayIcon.ActivationReason.Trigger or event == QSystemTrayIcon.ActivationReason.DoubleClick):
-			w = self.trayMenu.actionEdit
+		if (event == QSystemTrayIcon.ActivationReason.Trigger):
+			self.trayMenu.actionEdit.trigger()
 
-			w.setChecked(not w.isChecked())
-			w._triggered()
+		elif (event == QSystemTrayIcon.ActivationReason.MiddleClick):
+			self.trayMenu.actionSettings.trigger()
+
+
 
 

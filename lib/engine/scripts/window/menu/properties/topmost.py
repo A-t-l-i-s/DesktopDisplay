@@ -17,16 +17,19 @@ class Scripts_Window_Menu_Properties_Topmost(RFT_Object, QAction):
 
 		# ~~~~~~~ Variables ~~~~~~
 		self.parent = parent
+
+		self.scope = self.parent.parent.parent.scope
+		self.window = self.scope.window
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Topmost")
 
-		self.setIcon(Icons.topmost)
+		self.setIcon(Icons.core.topmost)
 
 		self.setCheckable(True)
-		self.setChecked(self.parent.parent.parent.script.window.topmost)
+		self.setChecked(self.window.topmost)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -37,11 +40,6 @@ class Scripts_Window_Menu_Properties_Topmost(RFT_Object, QAction):
 
 
 	def _triggered(self):
-		win = self.parent.parent.parent
-
-		win.script.window.topmost = not win.script.window.topmost
-
-		win.reloadProperties()
-		win.startEditing()
+		self.window.topmost = not self.window.topmost
 
 

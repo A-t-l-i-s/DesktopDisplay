@@ -44,8 +44,15 @@ namespace Path{
 
 			// Add dll directory
 			AddDllDirectory(
-				binPath.wstring().c_str()
+				binPath.generic_wstring().c_str()
 			);
+
+
+			// Allocate instances directory
+			{
+				fs::path path = "insts";
+				fs::create_directories(path);
+			}
 
 
 			// Set done
@@ -56,10 +63,10 @@ namespace Path{
 
 
 	string child(string name){
-		return (programPath / name).string();
+		return (programPath / name).generic_string();
 	}
 
 	wstring childW(string name){
-		return (programPath / name).wstring();
+		return (programPath / name).generic_wstring();
 	}
 };

@@ -22,28 +22,28 @@ class Scripts_Window_Menu_Settings(RFT_Object, QMenu):
 		self.parent = parent
 
 		self.actions = []
+
+		self.scope = self.parent.parent.scope
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setTitle("Settings")
 
-		self.setIcon(Icons.settings)
-
-		self.setStyleSheet(Styles.settings)
+		self.setIcon(Icons.core.settings)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 		# ~~~~~~~~~~~~ Actions ~~~~~~~~~~~
-		for k, v in self.parent.parent.script.settings.items():
+		for k, v in self.scope.settingsDefault.items():
 			action = Scripts_Window_Menu_Settings_Item(self, k, v)			
 			self.addAction(action)
 
-			if (v.get("seperator")):
+			if (v.get("separator")):
 				self.addSeparator()
 
 			self.actions.append(action)
-			
+
 
 		if (len(self.actions) > 0):
 			self.addSeparator()

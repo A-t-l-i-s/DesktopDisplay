@@ -23,7 +23,7 @@ class Window_SystemTray_Menu_Restart(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Restart")
 
-		self.setIcon(Icons.reset)
+		self.setIcon(Icons.core.reset)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

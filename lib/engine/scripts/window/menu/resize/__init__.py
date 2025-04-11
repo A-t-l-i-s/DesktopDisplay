@@ -30,7 +30,7 @@ class Scripts_Window_Menu_Resize(RFT_Object, QMenu):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setTitle("Resize")
 
-		self.setIcon(Icons.resize)
+		self.setIcon(Icons.core.resize)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

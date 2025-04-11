@@ -23,7 +23,7 @@ class Scripts_Window_Menu_Resize_Reset(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Reset")
 
-		self.setIcon(Icons.reset)
+		self.setIcon(Icons.core.reset)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -38,10 +38,11 @@ class Scripts_Window_Menu_Resize_Reset(RFT_Object, QAction):
 		curPos = cur.pos()
 
 		win = self.parent.parent.parent
+		dw = win.scope.windowDefault
 
 		win.resize(
-			200,
-			200
+			dw.width,
+			dw.height
 		)
 
 		win.move(

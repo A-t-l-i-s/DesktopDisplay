@@ -4,7 +4,6 @@ from .menu import *
 
 from .canvas import *
 from .resize import *
-from .locked import *
 
 
 
@@ -17,17 +16,20 @@ __all__ = ("Scripts_Window",)
 
 
 class Scripts_Window(RFT_Object, QMainWindow):
-	def __init__(self, parent, script):
+	def __init__(self, scope, parent):
 		super().__init__(parent)
 
 
 		# ~~~~~~~ Variables ~~~~~~
+		self.scope = scope
+
 		self.parent = parent
 
-		self.script = script
-		self.settings = script.table.settings
+		self.window = scope.window
+		self.settings = scope.settings
 
-		self.threads = []
+		self.inst = scope.inst
+
 		self.click = None
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -35,34 +37,37 @@ class Scripts_Window(RFT_Object, QMainWindow):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.reloadProperties()
 
-
-		# Set Window Size
-		self.resize(
-			self.script.window.width,
-			self.script.window.height
-		)
-
-		# Set Window Minimum Size
-		self.setMinimumSize(100, 20)
+		self.setStyleSheet(Styles.core.menu)
 
 
 		# ~~~~~~ Move Window ~~~~~
 		cur = QCursor()
-		screen = QtApp.screenAt(cur.pos())
+		screen = QApplication.screenAt(cur.pos())
 		size = screen.availableGeometry()
 
 
-		if (self.script.window.x is None):
-			self.script.window.x = round((size.x() + size.width() / 2) - (self.width() / 2))
+		if (self.window.x is None):
+			self.window.x = round((size.x() + size.width() / 2) - (self.width() / 2))
 
-		if (self.script.window.y is None):
-			self.script.window.y = round((size.y() + size.height() / 2) - (self.height() / 2))
+		if (self.window.y is None):
+			self.window.y = round((size.y() + size.height() / 2) - (self.height() / 2))
 		
 
-		self.move(
-			self.script.window.x,
-			self.script.window.y
+		# Set Window Size
+		self.resize(
+			self.window.width,
+			self.window.height
 		)
+
+		# Set Window Position
+		self.move(
+			self.window.x,
+			self.window.y
+		)
+
+
+		# Set Window Minimum Size
+		self.setMinimumSize(20, 20)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -74,62 +79,27 @@ class Scripts_Window(RFT_Object, QMainWindow):
 		self.resizeWidget.move(1, 1)
 		self.resizeWidget.hide()
 
-		self.lockedWidget = Scripts_Window_Locked(self)
-		self.lockedWidget.move(20, 3)
-		self.lockedWidget.hide()
-
 		self.menuWidget = Scripts_Window_Menu(self)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-		# ~~~~~~ Init Script ~~~~~
-		if ((func := self.script.init) != None):
-			while True:
-				try:
-					func(self)
-
-				except:
-					if (RFT_Exception.Traceback().alert(f"{self.script.path} : init()") != RFT_Exception.ALERT_RETRY):
-						break
-
-				else:
-					break
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-	# ~~~~~~~~ Threads ~~~~~~~
-	def startThread(self, func, args = (), kwargs = {}):
-		thread = threading.Thread(
-			target = func,
-			args = args,
-			kwargs = kwargs,
-			daemon = True
-		)
-
-		self.threads.append(thread)
-
-		thread.start()
-	# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-	# ~~~~~~~~~~ Size Events ~~~~~~~~~
-	def moveEvent(self, event):
-		self.script.window.x = self.x()
-		self.script.window.y = self.y()
-
-
-	def resizeEvent(self, event):
-		self.script.window.width = self.width()
-		self.script.window.height = self.height()
-	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 	# ~~~~~~~~~~~ Reloading ~~~~~~~~~~
-	def reloadProperties(self):
+	def reloadProperties(self, *, topmost:bool = None, transparent:bool = None, events:bool = None):
+		# If default value isn't set then get the saved properties 
+		if (topmost is None):
+			topmost = self.window.topmost
+		
+		if (transparent is None):
+			transparent = self.window.transparent
+
+		if (events is None):
+			events = self.window.events
+
+
 		# Attributes
 		self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, True)
-		self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, self.script.window.transparent)
+		self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, transparent)
 		self.setAttribute(Qt.WidgetAttribute.WA_NoChildEventsForParent, True)
 
 		# Flags
@@ -139,57 +109,74 @@ class Scripts_Window(RFT_Object, QMainWindow):
 			Qt.WindowType.X11BypassWindowManagerHint
 		)
 
-		# Transparent Events
-		if (not self.script.window.events):
-			self.setWindowFlags(
-				self.windowFlags() | Qt.WindowType.WindowTransparentForInput
-			)
-
 		# Topmost Flags
-		if (self.script.window.topmost):
+		if (topmost):
 			self.setWindowFlags(
 				self.windowFlags() | Qt.WindowType.WindowStaysOnTopHint
 			)
-			self.raise_()
 
 		else:
 			self.setWindowFlags(
 				self.windowFlags() | Qt.WindowType.WindowStaysOnBottomHint
 			)
-			self.lower()
 
+		# Transparent Events
+		if (not events):
+			self.setWindowFlags(
+				self.windowFlags() | Qt.WindowType.WindowTransparentForInput
+			)
 
 		# Mouse Tracking
-		self.setMouseTracking(self.script.window.events)
+		self.setMouseTracking(events)
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+	# ~~~~~~~~~~ Size Events ~~~~~~~~~
+	def moveEvent(self, event):
+		pos = event.pos()
+		oldPos = event.oldPos()
 
-	# ~~~~~~~~~~~~ Editing ~~~~~~~~~~~
-	def startEditing(self):
-		self.script.editing = True
+		x, y = pos.x(), pos.y()
+		x_, y_ = oldPos.x(), oldPos.y()
 
-		self.resizeWidget.show()
-		self.lockedWidget.show()
+		self.window.x = x
+		self.window.y = y
 
-		self.setMouseTracking(True)
-		self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowStaysOnBottomHint)
-		self.setWindowFlags(self.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
-		self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowTransparentForInput)
+		self.menuWidget.menuMove.menuManual.actionX.reload()
+		self.menuWidget.menuMove.menuManual.actionY.reload()
 
-		self.show()
-		self.raise_()
+		# ~~~~~~ Move Event ~~~~~~
+		if (self.scope.getEnabled()):
+			if ((func := self.scope.moveEvent) is not None):
+				try:
+					func(self.scope, event)
+
+				except:
+					win = self.scope.gui.parent
+
+					if (win.alert_disable_ignore(f"{self.scope.id} : moveEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+						self.scope.moveEvent = None
+		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-	def stopEditing(self):
-		self.script.editing = False
+	def resizeEvent(self, event):
+		self.window.width = self.width()
+		self.window.height = self.height()
 
-		self.resizeWidget.hide()
-		self.lockedWidget.hide()
+		self.menuWidget.menuMove.menuManual.actionWidth.reload()
+		self.menuWidget.menuMove.menuManual.actionHeight.reload()
 
-		self.reloadProperties()
+		# ~~~~~ Resize Event ~~~~~
+		if (self.scope.getEnabled()):
+			if ((func := self.scope.resizeEvent) is not None):
+				try:
+					func(self.scope, event)
 
-		self.show()
+				except:
+					win = self.scope.gui.parent
+
+					if (win.alert_disable_ignore(f"{self.scope.id} : resizeEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+						self.scope.resizeEvent = None
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -199,7 +186,7 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 
 	def mousePressEvent(self, event):
-		if (self.script.editing):
+		if (self.inst.editing):
 			btn = event.button()
 			pos = event.pos()
 			x, y = pos.x(), pos.y()
@@ -212,22 +199,26 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 			elif (btn == Qt.MouseButton.RightButton):
 				self.menuWidget.popup(curPos)
+				self.click = None
 
 
 		else:
 			# ~~~~~~ Press Event ~~~~~
-			if (self.script.mousePress != None):
-				try:
-					self.script.mousePress(self, event)
+			if (self.scope.getEnabled()):
+				if ((func := self.scope.mousePressEvent) is not None):
+					try:
+						func(self.scope, event)
 
-				except:
-					if (RFT_Exception.Traceback().alert(f"{self.script.path} : mousePress()") == RFT_Exception.ALERT_ABORT):
-						self.script.mousePress = None
+					except:
+						win = self.scope.gui.parent
+
+						if (win.alert_disable_ignore(f"{self.scope.id} : mousePressEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+							self.scope.mousePressEvent = None
 			# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 	def mouseReleaseEvent(self, event):
-		if (self.script.editing):
+		if (self.inst.editing):
 			btn = event.button()
 
 			if (btn == Qt.MouseButton.LeftButton):
@@ -235,18 +226,21 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 		else:
 			# ~~~~~ Release Event ~~~~
-			if (self.script.mouseRelease != None):
-				try:
-					self.script.mouseRelease(self, event)
+			if (self.scope.getEnabled()):
+				if ((func := self.scope.mouseReleaseEvent) is not None):
+					try:
+						func(self.scope, event)
 
-				except:
-					if (RFT_Exception.Traceback().alert(f"{self.script.path} : mouseRelease()") == RFT_Exception.ALERT_ABORT):
-						self.script.mouseRelease = None
+					except:
+						win = self.scope.gui.parent
+
+						if (win.alert_disable_ignore(f"{self.scope.id} : mouseReleaseEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+							self.scope.mouseReleaseEvent = None
 			# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 	def mouseMoveEvent(self, event):
-		if (self.script.editing):
+		if (self.inst.editing):
 			btn = event.button()
 			pos = event.pos()
 
@@ -257,7 +251,7 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 			if (btn == Qt.MouseButton.NoButton):
 				if (self.click is not None):
-					if (not self.script.window.locked):
+					if (not self.window.locked):
 						x = curPos.x() - self.click[0]
 						y = curPos.y() - self.click[1]
 
@@ -265,38 +259,46 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 		else:
 			# ~~~~~~ Move Event ~~~~~~
-			if (self.script.mouseMove != None):
-				try:
-					self.script.mouseMove(self, event)
+			if (self.scope.getEnabled()):
+				if ((func := self.scope.mouseMoveEvent) is not None):
+					try:
+						func(self.scope, event)
 
-				except:
-					if (RFT_Exception.Traceback().alert(f"{self.script.path} : mouseMove()") == RFT_Exception.ALERT_ABORT):
-						self.script.mouseMove = None
-			# ~~~~~~~~~~~~~~~~~~~~~~~~
+					except:
+						win = self.scope.gui.parent
+
+						if (win.alert_disable_ignore(f"{self.scope.id} : mouseMoveEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+							self.scope.mouseMoveEvent = None
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 	# ~~~~~~~~~~ Key Events ~~~~~~~~~~
 	def keyPressEvent(self, event):
-		if (not self.script.editing):
-			if (self.script.keyPress != None):
-				try:
-					self.script.keyPress(self, event)
+		if (not self.inst.editing):
+			if (self.scope.getEnabled()):
+				if ((func := self.scope.keyPressEvent) is not None):
+					try:
+						func(self.scope, event)
 
-				except:
-					if (RFT_Exception.Traceback().alert(f"{self.script.path} : keyPress()") == RFT_Exception.ALERT_ABORT):
-						self.script.keyPress = None
+					except:
+						win = self.scope.gui.parent
+
+						if (win.alert_disable_ignore(f"{self.scope.id} : keyPressEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+							self.scope.keyPressEvent = None
 
 
 	def keyReleaseEvent(self, event):
-		if (not self.script.editing):
-			if (self.script.keyRelease != None):
-				try:
-					self.script.keyRelease(self, event)
+		if (not self.inst.editing):
+			if (self.scope.getEnabled()):
+				if ((func := self.scope.keyReleaseEvent) is not None):
+					try:
+						func(self.scope, event)
 
-				except:
-					if (RFT_Exception.Traceback().alert(f"{self.script.path} : keyRelease()") == RFT_Exception.ALERT_ABORT):
-						self.script.keyRelease = None
+					except:
+						win = self.scope.gui.parent
+
+						if (win.alert_disable_ignore(f"{self.scope.id} : keyReleaseEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+							self.scope.keyReleaseEvent = None
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

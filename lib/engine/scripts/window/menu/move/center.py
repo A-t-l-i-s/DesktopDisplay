@@ -23,7 +23,7 @@ class Scripts_Window_Menu_Move_Center(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Center")
 
-		self.setIcon(Icons.center)
+		self.setIcon(Icons.core.center)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -35,7 +35,7 @@ class Scripts_Window_Menu_Move_Center(RFT_Object, QAction):
 
 	def _triggered(self):
 		cur = QCursor()
-		screen = QtApp.screenAt(cur.pos())
+		screen = QApplication.screenAt(cur.pos())
 		size = screen.availableGeometry()
 
 		win = self.parent.parent.parent

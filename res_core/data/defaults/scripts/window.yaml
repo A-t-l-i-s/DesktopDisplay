@@ -1,0 +1,13 @@
+
+width: 200
+height: 200
+
+x: null
+y: null
+
+locked: false
+hidden: false
+
+topmost: false
+transparent: false
+events: false

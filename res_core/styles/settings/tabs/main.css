@@ -1,0 +1,28 @@
+
+QWidget{
+	border: none;
+
+	background-color: rgb(30, 30, 30);
+}
+
+
+QTabWidget::tab-bar{
+	alignment: center;
+}
+
+
+QTabBar::tab{
+	color: white;
+	background-color: rgb(40, 40, 40);
+
+	font-family: Dosis SemiBold;
+	font-size: 15px;
+
+	padding: 5px 10px;
+
+	border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+QTabBar::tab:selected{
+	background-color: rgb(50, 50, 50);
+}

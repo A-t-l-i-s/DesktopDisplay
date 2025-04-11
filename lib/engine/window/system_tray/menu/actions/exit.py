@@ -23,7 +23,7 @@ class Window_SystemTray_Menu_Exit(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Exit")
 
-		self.setIcon(Icons.exit)
+		self.setIcon(Icons.core.exit)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

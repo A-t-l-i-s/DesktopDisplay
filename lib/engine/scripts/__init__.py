@@ -1,5 +1,6 @@
 from engine.require import *
 
+from .scope import *
 from .window import *
 
 
@@ -13,193 +14,184 @@ __all__ = ("Scripts",)
 
 
 class Scripts(RFT_Object):
-	scripts:list = []
+	scopes:RFT_Structure = RFT_Structure()
 
+	editing:bool = False
+
+	enabled:RFT_Structure = Tables.enabled
+
+
+	# ~~~~~~~~ Finish ~~~~~~~~
+	@classmethod
+	def finish(self):
+		# Turn off editing mode
+		self.stopEditing()
+
+		# Call all exit events
+		for key, scope in self.scopes.items():
+			if (scope.getEnabled()):
+				if ((func := scope.exitEvent) is not None):
+					try:
+						func(scope)
+
+					except:
+						RFT_Exception.Traceback().print()
+	# ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	# ~~~~~~~~ Update ~~~~~~~~
+	@classmethod
+	def update(self):
+		for key, scope in self.scopes.items():
+			if (scope.getEnabled()):
+				if ((win := scope.gui) is not None):
+					win.canvas.update()
+	# ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	# ~~~~~~~~~~~~ Editing ~~~~~~~~~~~
+	@classmethod
+	def startEditing(self):
+		self.editing = True
+
+		for key, scope in self.scopes.items():
+			if (scope.getEnabled()):
+				if ((win := scope.gui) is not None):
+					# Turn events property on window
+					win.reloadProperties(events = True)
+					win.show()
+					win.resizeWidget.show()
+
+					# Hide all widgets in canvas
+					for i in range(win.canvas.layout.count()):
+						item = win.canvas.layout.itemAt(i)
+						widget = item.widget()
+						widget.hide()
 
 
 	@classmethod
-	def load(self, window, path:str, namespace:str = ""):
-		path = Path(path)
+	def stopEditing(self):
+		self.editing = False
 
-		for d in path.iterdir():
-			if (d.is_dir()):
-				if ((m := (d / "main.py")).is_file()):
-					while True:
-						try:
-							# Import module spec
-							spec = importlib.util.spec_from_file_location("__RFTScript__", m)
+		for key, scope in self.scopes.items():
+			if (scope.getEnabled()):
+				if ((win := scope.gui) is not None):
+					if (not scope.window.hidden):
+						# Reset window properties
+						win.reloadProperties()
+						win.show()
+						win.resizeWidget.hide()
 
-							# Get module
-							mod = importlib.util.module_from_spec(spec)
+						# Show all widgets in canvas
+						for i in range(win.canvas.layout.count()):
+							item = win.canvas.layout.itemAt(i)
+							widget = item.widget()
+							widget.show()
 
-							# Compile module
-							spec.loader.exec_module(mod)
-
-							# Module dict to scope
-							scope = RFT_Structure(mod.__dict__)
-
-						except:
-							if (RFT_Exception.Traceback().alert(f"{m}") != RFT_Exception.ALERT_RETRY):
-								break
-
-						else:
-							script = RFT_Structure({
-								"init": None,
-								"draw": None,
-								
-								"settingsEvent": None,
-
-								"mousePress": None,
-								"mouseRelease": None,
-								"mouseMove": None,
-
-								"keyPress": None,
-								"keyRelease": None,
-
-								"path": d,
-								"editing": False,
-
-								"table": {},
-								"window": {},
-								
-								"config": {},
-								"settings": {}
-							})
+					else:
+						win.hide()
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-							# ~~~~~ Init Function ~~~~
-							if (func := scope.get("init")):
-								if (callable(func)):
-									script.init = func
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
+	# ~~~~~~~~~ Load Scripts ~~~~~~~~~
+	@classmethod
+	def load(self, window):
+		# Create structure
+		data = RFT_Structure()
 
-							# ~~~~ Paint Function ~~~~
-							if (func := scope.get("draw")):
-								if (callable(func)):
-									script.draw = func
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
+		# Create path
+		path = Path("res/scripts")
 
-							# ~~~ Setting Function ~~~
-							if (func := scope.get("settingsEvent")):
-								if (callable(func)):
-									script.settingsEvent = func
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
+		# Allocate path
+		path.mkdir(
+			parents = True,
+			exist_ok = True
+		)
 
+		if (path.is_dir()):
+			for f in path.glob("**/*"):
+				if (not f.is_dir()):
+					# Get parent/child path
+					parent = f.as_posix()
+					child = Path(parent.replace(path.as_posix(), ""))
+					filename = child.as_posix().strip("/")
 
-							# ~~~~~ Mouse Events ~~~~~
-							if (func := scope.get("mousePress")):
-								if (callable(func)):
-									script.mousePress = func
+					# Get attribute
+					attr, ext = RFT_Resource.getAttr(child)
 
-							if (func := scope.get("mouseRelease")):
-								if (callable(func)):
-									script.mouseRelease = func
-
-							if (func := scope.get("mouseMove")):
-								if (callable(func)):
-									script.mouseMove = func
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
+					# Create id
+					id_ = "_".join(attr)
 
 
-							# ~~~~~~ Key Events ~~~~~~
-							if (func := scope.get("keyPress")):
-								if (callable(func)):
-									script.keyPress = func
+					if (not self.scopes.contains(id_)):
+						if (ext in ("py", "pyc")):
+							# Create scope
+							scope = Scripts_Scope(id_, self)
+							scope.path = f.resolve()
 
-							if (func := scope.get("keyRelease")):
-								if (callable(func)):
-									script.keyRelease = func
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
+							self.scopes[id_] = scope
 
+							# Add scope to enabled
+							self.enabled += {id_: False}
 
-							# ~~~~~~~~~ Table ~~~~~~~~
-							name = namespace + d.name
+							while True:
+								try:
+									# Import module spec
+									spec = importlib.util.spec_from_file_location("__DDScript__", f)
 
-							script.table = Tables.scripts.allocate(name)
+									# Get module
+									mod = importlib.util.module_from_spec(spec)
+									# mod.__dict__["print"] = scope.print
 
-							script.window = Tables.windows.allocate(name)
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
+									# Compile module
+									spec.loader.exec_module(mod)
 
+									# Module dict to scope
+									struct = RFT_Structure(mod.__dict__)
 
-							# ~~~~~~~~ Settings ~~~~~~
-							if ((p := (d / "settings.yaml")).is_file()):
-								while True:
-									with p.open("rb") as file:
-										try:
-											data = yaml.load(
-												file,
-												Loader = yaml.FullLoader
-											)
-										
-										except:
-											if (RFT_Exception.Traceback().alert(f"{p}") != RFT_Exception.ALERT_RETRY):
-												break
+									# Set value inside the parent
+									if (struct.contains("main")):
+										main = struct.main
 
-										else:
-											t = script.table.allocate("settings")
-											
-											if (data is not None):
-												script.settings *= data
+										if (callable(main)):
+											main(scope)
 
-												for k, v in data.items():
-													if (not t.contains(k)):
-														t[k] = v.get("value", None)
+								except:
+									if (window.alert(RFT_Exception.Traceback(), (window.alertWindow.ALERT_RETRY, window.alertWindow.ALERT_DISABLE), f"{id_}").wait() != window.alertWindow.ALERT_RETRY):
+										self.enabled[id_] = False
+										break
 
-											break
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-							# ~~~~~~~~~ Window ~~~~~~~
-							if ((p := (d / "window.yaml")).is_file()):
-								while True:
-									with p.open("rb") as file:
-										try:
-											data = yaml.load(
-												file,
-												Loader = yaml.FullLoader
-											)
-										
-										except:
-											if (RFT_Exception.Traceback().alert(f"{p}") != RFT_Exception.ALERT_RETRY):
-												break
-
-										else:
-											if (data is not None):
-												script.window.default(data)
-												break
-
-
-							script.window.default({
-								"title": d.name,
-
-								"width": 200,
-								"height": 200,
-
-								"x": None,
-								"y": None,
-								"locked": False,
-
-								"topmost": False,
-								"transparent": False,
-								"events": False
-							})
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-							# ~~~~~ Create Window ~~~~
-							try:
-								win = Scripts_Window(window, script)
-							
-							except:
-								if (RFT_Exception.Traceback().alert(f"{d} : Scripts_Window") != RFT_Exception.ALERT_RETRY):
+								else:
 									break
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-							else:
-								self.scripts.append(win)
-								break
-							# ~~~~~~~~~~~~~~~~~~~~~~~~
 
+	# ~~~~~~ Load Scripts Window ~~~~~
+	@classmethod
+	def loadWindows(self, window):
+		for key, scope in self.scopes.items():
+			if ((win := scope.gui) is None):
+				if (scope.getEnabled()):
+					try:
+						# ~~~~~~ Init Window ~~~~~
+						win = Scripts_Window(scope, window)
+						win.show()
+
+						scope.gui = win
+								
+						# ~~~~~~~~~~ Init Script ~~~~~~~~~				
+						if ((func := scope.initEvent) is not None):
+							func(scope, win)
+
+					except:
+						if (window.alert_disable_ignore(f"{scope.id} : initEvent()").wait() != window.alertWindow.ALERT_IGNORE):
+							self.enabled[id_] = False
+
+			else:
+				if (scope.getEnabled()):
+					win.show()
 
 				else:
-					self.load(window, d, f"{d.name}_")
+					win.hide()
+	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

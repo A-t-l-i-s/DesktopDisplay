@@ -4,6 +4,9 @@ from .events import *
 from .topmost import *
 from .transparent import *
 
+from .locked import *
+from .hidden import *
+
 
 
 
@@ -27,7 +30,7 @@ class Scripts_Window_Menu_Properties(RFT_Object, QMenu):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setTitle("Properties")
 
-		self.setIcon(Icons.window)
+		self.setIcon(Icons.core.window)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -40,6 +43,14 @@ class Scripts_Window_Menu_Properties(RFT_Object, QMenu):
 
 		self.actionEvents = Scripts_Window_Menu_Properties_Events(self)
 		self.addAction(self.actionEvents)
+
+		self.addSeparator()
+
+		self.actionLocked = Scripts_Window_Menu_Properties_Locked(self)
+		self.addAction(self.actionLocked)
+
+		self.actionHidden = Scripts_Window_Menu_Properties_Hidden(self)
+		self.addAction(self.actionHidden)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

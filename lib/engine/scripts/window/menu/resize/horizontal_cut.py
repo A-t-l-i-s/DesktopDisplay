@@ -23,7 +23,7 @@ class Scripts_Window_Menu_Resize_Horizontal_Cut(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Horizontal Cut")
 
-		self.setIcon(Icons.horizontal_cut)
+		self.setIcon(Icons.core.horizontal_cut)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

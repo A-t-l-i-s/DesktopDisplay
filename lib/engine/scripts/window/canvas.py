@@ -17,6 +17,8 @@ class Scripts_Window_Canvas(RFT_Object, QWidget):
 
 		# ~~~~~~~ Variables ~~~~~~
 		self.parent = parent
+
+		self.scope = self.parent.scope
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -25,71 +27,111 @@ class Scripts_Window_Canvas(RFT_Object, QWidget):
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+		# ~~~~~~~~~~~~ Layout ~~~~~~~~~~~~
+		self.layout = QVBoxLayout(self)
+
+		self.layout.setSpacing(0)
+		self.layout.setContentsMargins(0, 0, 0, 0)
+		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 	def paintEvent(self, event):
-		# Create painter instance
-		painter = QPainter()
+		if (self.scope.getEnabled()):
+			# Create painter instance
+			painter = QPainter()
 
-		# Start paint
-		painter.begin(self)
-
-
-		# ~~~~ Draw Function ~~~~~
-		if ((func := self.parent.script.draw) != None):
-			try:
-				func(self.parent, painter)
-
-			except:
-				if (RFT_Exception.Traceback().alert(f"{self.parent.script.path} : draw()") == RFT_Exception.ALERT_ABORT):
-					self.script.draw = None
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-		# ~~~~~ Editing Mode ~~~~~
-		if (self.parent.script.editing):
+			# Size
 			w = self.width()
 			h = self.height()
 
-			c = QColor(10, 10, 10)
+
+			# Start paint
+			painter.begin(self)
 
 
-			# Top Bar
-			painter.fillRect(
-				0, 0,
-				w, 20,
-				c
-			)
+			# Erase background
+			if (not self.scope.window.transparent):
+				painter.fillRect(0, 0, w, h, QColor(0, 0, 0))
 
-			# Border Pen
-			painter.setPen(
-				QPen(
-					c,
-					3
+
+			# ~~~~ Draw Function ~~~~~
+			if (not self.scope.window.hidden):
+				if ((func := self.scope.drawEvent) is not None):
+					try:
+						func(self.scope, painter)
+
+					except:
+						win = self.scope.gui.parent
+						
+						if (win.alert_disable_ignore(f"{self.scope.id} : drawEvent()").wait() != win.alertWindow.ALERT_IGNORE):
+							self.scope.drawEvent = None
+			# ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+			# Reset Pen/Brush
+			painter.setPen(QColor(0, 0, 0, 0))
+			painter.setBrush(QColor(0, 0, 0, 0))
+
+
+			# ~~~~~ Editing Mode ~~~~~
+			if (self.scope.inst.editing):
+				# Make Window Clickable
+				painter.fillRect(
+					0, 0,
+					w, h,
+					QColor(0, 0, 0, 1)
 				)
-			)
 
-			# Draw Border
-			painter.drawRect(
-				1, 1,
-				w - 3, h - 3
-			)
+				# Border color
+				c = QColor(10, 10, 10, 200)
 
 
-			# Title Color/Font
-			painter.setPen(QColor(255, 255, 255))
-			painter.setFont(QFont("Dosis", 11, 600, False))
-
-			# Draw Text			
-			painter.drawText(
-				58, 0,
-				w - 65, 20,
-				Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter,
-				self.parent.script.window.title
-			)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
+				# Top Bar
+				painter.fillRect(
+					0, 0,
+					w, 20,
+					c
+				)
 
 
-		# End paint
-		painter.end()
+				# Border Pen
+				painter.setPen(
+					QPen(
+						c,
+						3
+					)
+				)
+
+				# Draw Border
+				painter.drawRect(
+					1, 20,
+					w - 3, h - 3 - 18
+				)
+
+
+				# Title Color/Font
+				painter.setPen(QColor(255, 255, 255))
+				painter.setFont(QFont("Dosis", 11, 600, False))
+
+				# Fetch window title
+				if ((t := self.scope.locs.get("title")) is not None):
+					title = t
+
+				else:
+					title = self.scope.id
+
+				# Draw Text		
+				painter.drawText(
+					22, 0,
+					w - 26, 20,
+					Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter,
+					title
+				)
+			# ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+			# End paint
+			painter.end()
 
 

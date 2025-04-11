@@ -23,7 +23,7 @@ class Scripts_Window_Menu_Move_Right(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Right")
 
-		self.setIcon(Icons.right_double)
+		self.setIcon(Icons.core.right_double)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -35,7 +35,7 @@ class Scripts_Window_Menu_Move_Right(RFT_Object, QAction):
 
 	def _triggered(self):
 		cur = QCursor()
-		screen = QtApp.screenAt(cur.pos())
+		screen = QApplication.screenAt(cur.pos())
 		size = screen.availableGeometry()
 
 		win = self.parent.parent.parent

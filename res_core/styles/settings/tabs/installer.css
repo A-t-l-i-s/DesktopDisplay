@@ -1,0 +1,9 @@
+
+
+QFrame#main{
+	border: 1px solid rgb(50, 50, 50);
+	border-radius: 7px;
+
+	background-color: rgb(40, 40, 40);
+}
+

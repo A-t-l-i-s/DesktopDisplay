@@ -1,6 +1,6 @@
 
 !define ZIP2EXE_NAME "DesktopDisplay"
-!define ZIP2EXE_OUTFILE "installer\DesktopDisplay.exe"
+!define ZIP2EXE_OUTFILE "DesktopDisplay_Installer.exe"
 
 !define ZIP2EXE_COMPRESSOR_ZLIB
 !define ZIP2EXE_INSTALLDIR "$ProgramFiles\Atlis\DesktopDisplay"
@@ -14,6 +14,6 @@
 	
 	AccessControl::GrantOnFile "$INSTDIR" "(BU)" "GenericRead + GenericWrite"
 
-	CreateShortcut "$DESKTOP\DesktopDisplay.lnk" "$INSTDIR\DesktopDisplay.exe" 
+	Exec "$INSTDIR\DesktopDisplay.exe"
 !insertmacro SECTION_END
 

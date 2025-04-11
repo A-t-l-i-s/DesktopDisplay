@@ -2,8 +2,8 @@ from engine.require import *
 
 from .move import *
 from .resize import *
-from .settings import *
 from .properties import *
+from .settings import *
 
 
 
@@ -17,7 +17,7 @@ __all__ = ("Scripts_Window_Menu",)
 
 class Scripts_Window_Menu(RFT_Object, QMenu):
 	def __init__(self, parent):
-		super().__init__(parent.parent)
+		super().__init__(parent)
 
 
 		# ~~~~~~~~~~~ Variables ~~~~~~~~~~
@@ -26,7 +26,7 @@ class Scripts_Window_Menu(RFT_Object, QMenu):
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
-		self.setStyleSheet(Styles.menu)
+		self.setStyleSheet(Styles.core.menu)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

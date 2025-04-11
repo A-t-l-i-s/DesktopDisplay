@@ -17,16 +17,19 @@ class Scripts_Window_Menu_Properties_Transparent(RFT_Object, QAction):
 
 		# ~~~~~~~ Variables ~~~~~~
 		self.parent = parent
+
+		self.scope = self.parent.parent.parent.scope
+		self.window = self.scope.window
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Transparent")
 
-		self.setIcon(Icons.transparent)
+		self.setIcon(Icons.core.transparent)
 
 		self.setCheckable(True)
-		self.setChecked(self.parent.parent.parent.script.window.transparent)
+		self.setChecked(self.window.transparent)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -37,11 +40,6 @@ class Scripts_Window_Menu_Properties_Transparent(RFT_Object, QAction):
 
 
 	def _triggered(self):
-		win = self.parent.parent.parent
-
-		win.script.window.transparent = not win.script.window.transparent
-
-		win.reloadProperties()
-		win.startEditing()
+		self.window.transparent = not self.window.transparent
 
 

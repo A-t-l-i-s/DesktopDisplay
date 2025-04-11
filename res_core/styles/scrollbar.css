@@ -1,0 +1,30 @@
+
+
+QScrollBar{
+	width: 8px;
+
+	background-color: transparent;
+}
+
+QScrollBar::handle{
+	border: none;
+
+	background-color: rgb(50, 50, 50);
+}
+
+QScrollBar::handle::pressed{
+	border: none;
+
+	background-color: rgb(50, 50, 50);
+}
+
+QScrollBar::add-line{
+	border: none;
+	background: none;
+}
+
+QScrollBar::sub-line{
+	border: none;
+	background: none;
+}
+

@@ -1,5 +1,4 @@
 from engine.require import *
-
 from engine.scripts import *
 
 
@@ -25,10 +24,10 @@ class Window_SystemTray_Menu_Edit(RFT_Object, QAction):
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
 		self.setText("Edit")
 
-		self.setIcon(Icons.edit)
+		self.setIcon(Icons.core.edit)
 
-		self.setChecked(False)
 		self.setCheckable(True)
+		self.setChecked(Scripts.editing)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -40,14 +39,10 @@ class Window_SystemTray_Menu_Edit(RFT_Object, QAction):
 
 	def _triggered(self):
 		if (self.isChecked()):
-			# Hide all windows
-			for s in Scripts.scripts:
-				s.startEditing()
-
+			# Start editing all windows
+			Scripts.startEditing()
 
 		else:
 			# Show all windows
-			for s in Scripts.scripts:
-				s.stopEditing()
-
+			Scripts.stopEditing()
 
