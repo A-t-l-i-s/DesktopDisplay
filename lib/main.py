@@ -1,60 +1,87 @@
 from engine.require import *
-
 from engine.resources import *
-
-from engine.tasks import *
 from engine.window import *
-from engine.updater import *
 from engine.scripts import *
 
 
 
 
 
+__all__ = ("main", "task")
+
+
+
+
+
 def main():
-	# Check if already running
-	if (not Tasks.isRunning()):
-		# Terminate all previous running tasks
-		Tasks.finishTasks()
+	try:
+		# Check if already running
+		if (not Tasks.isRunning()):
+			# Init qt application
+			qtApp = QApplication([""])
+			qtApp.setStyle("Fusion")
 
 
-		# Init qt application
-		qtApp = QApplication([""])
-		qtApp.setStyle("Fusion")
+			# Load all resources
+			Resources.loadFonts(Scripts)
+			Resources.loadResources(Scripts)
 
 
-		# Load core resources
-		Resources.loadCore()
-		Resources.loadFonts()
+			if (not Internal.isExiting()):
+				# Create window
+				win = Window()
+				win.hide()
+
+				# Load scripts
+				Scripts.load(win)
+				Scripts.loadWindows(win)
 
 
-		if (not Core.isExiting()):
-			# Create window
-			win = Window()
-			win.hide()
+				if (not Internal.isExiting()):
+					# Start main loop
+					qtApp.exec()
 
 
-			# Load script resources
-			Resources.loadScripts(win)
+				# Terminate all scripts and tasks
+				Scripts.finish()
+				Scripts.finishTasks()
 
-			# Load scripts
-			Scripts.load(win)
-			Scripts.loadWindows(win)
+				# Save all tables
+				Resources.Tables_Obj.saveAll()
+				Resources.Tables_Scripts_Obj.saveAll()
+
+	except:
+		RFT_Exception.Traceback().alert("Unable to start")
 
 
-			if (not Core.isExiting()):
-				# Start main loop
-				qtApp.exec()
 
 
-			# Terminate all scripts
-			Scripts.finish()
 
-			# Terminate all tasks
-			Tasks.finish()
+def task(path):
+	try:
+		# Get parent/child path
+		path = Path(path)
 
-			# Save all tables
-			Resources.Tables_Obj.saveAll()
-			Resources.Tables_Scripts_Obj.saveAll()
+		if (path.is_file()):
+			# Import module spec
+			spec = importlib.util.spec_from_file_location("__DDTask__", path)
 
+			# Get module
+			mod = importlib.util.module_from_spec(spec)
+
+			# Compile module
+			spec.loader.exec_module(mod)
+
+			# Module dict to scope
+			struct = RFT_Structure(mod.__dict__)
+
+			# Set value inside the parent
+			if (struct.contains("main")):
+				main = struct.main
+
+				if (callable(main)):
+					main()
+
+	except:
+		RFT_Exception.Traceback().print()
 

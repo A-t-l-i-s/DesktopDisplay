@@ -1,68 +1,77 @@
+import sys
+import time
 from RFTLib.Rypple import *
 
 
 
 scope = RFT_Rypple.begin(RFT_Rypple_Process, RFT_Rypple_Filesystem, RFT_Rypple_C, RFT_Rypple_CPP)
 
-if (False):
-	scope.run("windres src/resource.rc -O coff -o src/resource.res")
-	scope.wait()
+if (sys.platform == "win32"):
+	if (False):
+		scope.run("windres src/resource.rc -O coff -o src/resource.res")
+		scope.wait()
 
-	scope.inFile("src/main.cpp")
-	scope.outFile("DesktopDisplay.exe")
+		scope.inFile("src/main.cpp")
+		scope.outFile("DesktopDisplay.exe")
 
-	scope.includePath("src/include")
+		scope.includePath("src/include")
 
-	scope.libraryPath("C:/Python311/libs")
-	scope.includePath("C:/Python311/include")
+		scope.libraryPath("C:/Python311/libs")
+		scope.includePath("C:/Python311/include")
 
-	scope.library("python3")
-	scope.library("python311")
+		scope.library("python3")
+		scope.library("python311")
 
-	scope.bit(64)
-	scope.version("c++20")
-	scope.compression(2)
-	scope.add("src/resource.res")
-	scope.add("-s")
-
-
-	# Compile in production mode
-	# scope.add("-D PRODUCTION")
+		scope.bit(64)
+		scope.version("c++20")
+		scope.compression(2)
+		scope.add("src/resource.res")
+		scope.add("-s")
 
 
-	# Windowed Mode
-	scope.ui(True)
-	scope.done().wait()
+		# Compile in production mode
+		# scope.add("-D PRODUCTION")
 
 
-	# Consoled Mode
-	scope.add("-D DEBUG")
-
-	scope.run("windres src/resource.rc -O coff -o src/resource.res -D DEBUG")
-	scope.wait()
-
-	scope.ui(False)
-	scope.outFile("DesktopDisplay_Debug.exe")
-	scope.done().wait()
+		# Windowed Mode
+		scope.ui(True)
+		scope.done().wait()
 
 
-	# Multiprocessing/Task Mode
-	scope.add("-D TASK")
+		# Consoled Mode
+		scope.define("DEBUG")
 
-	scope.run("windres src/resource.rc -O coff -o src/resource.res -D DEBUG -D TASK")
-	scope.wait()
+		scope.run("windres src/resource.rc -O coff -o src/resource.res -D DEBUG")
+		scope.wait()
 
-	scope.ui(False)
-	scope.outFile("DesktopDisplay_Task.exe")
-	scope.done().wait()
-	
-
-	# Delete resources
-	scope.path("src/resource.res").remove()
+		scope.ui(False)
+		scope.outFile("DesktopDisplay_Debug.exe")
+		scope.done().wait()
 
 
-else:
-	scope.run("DesktopDisplay_Debug.exe").wait()
+		# Multiprocessing/Task Mode
+		scope.defineRemove("DEBUG")
+		scope.define("TASK")
+
+		scope.run("windres src/resource.rc -O coff -o src/resource.res -D TASK")
+		scope.wait()
+
+		scope.ui(False)
+		scope.outFile("DesktopDisplay_Task.exe")
+		scope.done().wait()
+		
+
+		# Delete resources
+		scope.path("src/resource.res").remove()
+
+
+	else:
+		scope.run("DesktopDisplay_Debug.exe").wait()
+		# scope.run("DesktopDisplay_Task.exe res/tasks/rta_task.py TEST_TASK --is_output").wait()
+		# while True:
+		# 	print("Poll")
+		# 	scope.run("DesktopDisplay_Debug.exe").wait()
+		# 	time.sleep(1)
 
 
 RFT_Rypple.end(scope)

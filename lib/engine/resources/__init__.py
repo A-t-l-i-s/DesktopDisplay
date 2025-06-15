@@ -68,7 +68,8 @@ class Resources(RFT_Object):
 	)
 	Tables_Obj.indent = True
 
-	Tables_Obj.saveEvery(30)
+	if (not Internal.isTask()):
+		Tables_Obj.saveEvery(30)
 
 	Tables = Tables_Obj.data
 	Tables.lift("Tables")
@@ -81,95 +82,21 @@ class Resources(RFT_Object):
 	)
 	Tables_Scripts_Obj.indent = True
 
-	Tables_Scripts_Obj.saveEvery(30)
+	if (not Internal.isTask()):
+		Tables_Scripts_Obj.saveEvery(30)
 
 	Tables_Scripts = Tables_Scripts_Obj.data
 	Tables_Scripts.lift("Tables_Scripts")
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
 	@classmethod
-	def loadCore(self):
+	def loadResources(self, obj:RFT_Object):
 		def err(exc, file):
-			RFT_Exception.Traceback().alert(f"Failed to load \"{file}\"")
-			Core.isExiting(True)
-
-
-		# ~~~~~~~~~ Data ~~~~~~~~~
-		dataObj = RFT_Resource(
-			"res_core/data",
-			{
-				r"yaml|yml": RFT_Resource_YAML,
-				r"json": RFT_Resource_JSON,
-				r"toml": RFT_Resource_TOML,
-				r"txt|log": RFT_Resource_TEXT
-			}
-		)
-
-		self.Data.core = dataObj.load(err)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-		# ~~~~~ Localization ~~~~~
-		locsObj = RFT_Resource(
-			"res_core/locs",
-			{
-				r"yaml|yml": RFT_Resource_YAML
-			}
-		)
-
-		self.Locs.core = locsObj.load(err)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-		# ~~~~~~~~~ Icons ~~~~~~~~
-		iconsObj = RFT_Resource(
-			"res_core/icons",
-			{
-				r".*": RFT_Resource_QT_QICON
-			}
-		)
-
-		self.Icons.core = iconsObj.load(err)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-		# ~~~~~~~~ Images ~~~~~~~~
-		imagesObj = RFT_Resource(
-			"res_core/images",
-			{
-				r".*": RFT_Resource_QT_QIMAGE
-			}
-		)
-
-		self.Images.core = imagesObj.load(err)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-		# ~~~~~~~~ Styles ~~~~~~~~
-		stylesObj = RFT_Resource(
-			"res_core/styles",
-			{
-				r"[cq]ss": RFT_Resource_TEXT
-			}
-		)
-
-		self.Styles.core = stylesObj.load(err)
-		# ~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-		if (not Core.isExiting()):
-			self.Tables.version += Data.core.defaults.version
-			self.Tables.window += Data.core.defaults.window
-
-
-
-	@classmethod
-	def loadScripts(self, window):
-		def err(exc, file):
-			if (window.alert_retry_ignore(f"Error loading \"{file}\"").wait() == window.alertWindow.ALERT_RETRY):
-				return True
+			obj.printErr(
+				f"resources : {file}",
+				exc
+			)
 
 
 		# ~~~~~~~~~ Data ~~~~~~~~~
@@ -237,7 +164,7 @@ class Resources(RFT_Object):
 
 
 	@classmethod
-	def loadFonts(self):
+	def loadFonts(self, obj:RFT_Object):
 		try:
 			# ~~~~~~~~~~~~~ Dosis ~~~~~~~~~~~~
 			QFontDatabase.addApplicationFontFromData(
@@ -300,6 +227,8 @@ class Resources(RFT_Object):
 			# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		except:
-			RFT_Exception.Traceback().alert("Failed to load fonts")
-			Core.isExiting(True)
+			obj.printErr(
+				f"resources : fonts",
+				RFT_Exception("Failed to load fonts")
+			)
 

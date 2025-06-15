@@ -40,6 +40,6 @@ class Scripts_Window_Menu_Properties_Transparent(RFT_Object, QAction):
 
 
 	def _triggered(self):
-		self.window.transparent = not self.window.transparent
+		self.window.transparent = self.isChecked()
 
 

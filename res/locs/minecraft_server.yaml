@@ -1,0 +1,18 @@
+
+title: Minecraft Server
+icon: null
+
+settings:
+  ip: IP
+  port: Port
+
+  iconSize: Icon Size
+  headSize: Head Size
+
+  colorBg: Background
+  colorName: Server Name Color
+  colorPing: Server Ping Color
+  colorOnline: Players Online Color
+  colorPlayer: Player Name Color
+
+  bedrock: Bedrock Server

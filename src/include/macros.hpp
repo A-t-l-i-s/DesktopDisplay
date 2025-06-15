@@ -7,13 +7,12 @@
 
 
 
+
 // ~~~~~~~~~ Program Name ~~~~~~~~~
-#ifdef DEBUG
-	#ifdef TASK
-		#define PROGRAM_NAME "DesktopDisplay Task"
-	#else
-		#define PROGRAM_NAME "DesktopDisplay Debug"
-	#endif
+#if defined(DEBUG)
+	#define PROGRAM_NAME "DesktopDisplay Debug"
+#elif defined(TASK)
+	#define PROGRAM_NAME "DesktopDisplay Task"
 #else
 	#define PROGRAM_NAME "DesktopDisplay"
 #endif
@@ -21,12 +20,10 @@
 
 
 // ~~~~~~~~~ Program File ~~~~~~~~~
-#ifdef DEBUG
-	#ifdef TASK
-		#define PROGRAM_FILE PROGRAM_FILE_TASK
-	#else
-		#define PROGRAM_FILE PROGRAM_FILE_DEBUG
-	#endif
+#if defined(DEBUG)
+	#define PROGRAM_FILE PROGRAM_FILE_DEBUG
+#elif defined(TASK)
+	#define PROGRAM_FILE PROGRAM_FILE_TASK
 #else
 	#define PROGRAM_FILE PROGRAM_FILE_WINDOWED
 #endif
@@ -34,12 +31,10 @@
 
 
 // ~~~~~~~~~ Program Icon ~~~~~~~~~
-#ifdef DEBUG
-	#ifdef TASK
-		#define PROGRAM_ICON "icon_task.ico"
-	#else
-		#define PROGRAM_ICON "icon_debug.ico"
-	#endif
+#if defined(DEBUG)
+	#define PROGRAM_ICON "icon_debug.ico"
+#elif defined(TASK)
+	#define PROGRAM_ICON "icon_task.ico"
 #else
 	#define PROGRAM_ICON "icon.ico"
 #endif
@@ -52,4 +47,6 @@
 #define PROGRAM_VERSION "1.0.0"
 #define PROGRAM_VERSION_ID 1,0,0
 
+#define PROGRAM_REGEX "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+#define PROGRAM_REGEX_NAME "DesktopDisplay"
 

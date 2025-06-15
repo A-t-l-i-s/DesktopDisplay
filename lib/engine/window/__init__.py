@@ -3,9 +3,8 @@ from engine.require import *
 from engine.scripts import *
 from engine.scripts.window import *
 
-from .alert import *
 from .timer import *
-from .settings import *
+from .canvas import *
 from .system_tray import *
 
 
@@ -25,6 +24,11 @@ class Window(RFT_Object, QMainWindow):
 
 
 		# ~~~~~~~ Variables ~~~~~~
+		self.width = 0
+		self.height = 0
+		
+		self.x = 0
+		self.y = 0
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -32,13 +36,50 @@ class Window(RFT_Object, QMainWindow):
 		self.setWindowIcon(Icons.core.icon)
 		self.setWindowTitle(Tables.window.title)
 
-		self.setStyleSheet(Styles.core.menu)
+		# Flags
+		self.setWindowFlags(
+			Qt.WindowType.Tool |
+			Qt.WindowType.WindowStaysOnBottomHint |
+			Qt.WindowType.CustomizeWindowHint |
+			Qt.WindowType.WindowTitleHint
+		)
+
+
+		cur = QCursor()
+		screen = QApplication.screenAt(cur.pos())
+		size = screen.availableGeometry()
+
+
+		# Geometry Variables
+		self.width = size.width() // 3
+		self.height = size.height() // 2
+
+		self.x = round((size.x() + size.width() / 2) - (self.width / 2))
+		self.y = round((size.y() + size.height() / 2) - (self.height / 2))
+		
+
+		# Set Window Size
+		self.resize(
+			self.width,
+			self.height
+		)
+
+		# Set Window Position
+		self.move(
+			self.x,
+			self.y
+		)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+		# ~~~~~~~~~~~~ Canvas ~~~~~~~~~~~~
+		self.canvas = Window_Canvas(self)
+		self.setCentralWidget(self.canvas)
+		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 		# ~~~~~~~~~~~~~ Timer ~~~~~~~~~~~~
 		self.timer = Window_Timer(self)
-		self.timer.start(1000 // Tables.window.rate)
+		self.timer.restart()
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 		# ~~~~~~~~~~ System Tray ~~~~~~~~~
@@ -46,57 +87,30 @@ class Window(RFT_Object, QMainWindow):
 		self.systemTray.show()
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		# ~~~~~~~~~ Window Alert ~~~~~~~~~
-		self.alertWindow = Window_Alert(self)
-		self.alertWindow.hide()
-		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		# ~~~~~~~~ Window Settings ~~~~~~~
-		self.settingsWindow = Window_Settings(self)
-		self.settingsWindow.hide()
-		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	# ~~~~~~~~ Console ~~~~~~~
+	def print(self, val:object):
+		Scripts.print("window", val)
 
 
-
-	# ~~~~~~~~~ Alert ~~~~~~~~
-	def alert(self, error:RFT_Exception, buttons:list | tuple = [Window_Alert.ALERT_OK], title:str = "Alert"):
-		self.alertWindow.error = error
-		self.alertWindow.buttons = buttons
-		self.alertWindow.code = None
-
-		self.alertWindow.setWindowTitle(title)
-
-		self.alertWindow.messageWidget.reload()
-		self.alertWindow.buttonsWidget.reload()
-
-		return self.alertWindow
-
-
-	def alert_retry_ignore(self, title:str = "Alert"):
-		return self.alert(RFT_Exception.Traceback(), (self.alertWindow.ALERT_RETRY, self.alertWindow.ALERT_IGNORE), title)
-
-	def alert_disable_ignore(self, title:str = "Alert"):
-		return self.alert(RFT_Exception.Traceback(), (self.alertWindow.ALERT_DISABLE, self.alertWindow.ALERT_IGNORE), title)
+	def printErr(self, exc:RFT_Exception):
+		Scripts.printErr("window", exc)
 	# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
-	def closeEvent(self, event):
-		self.exit()
-
-
-
+	# ~~~~~~~~ Events ~~~~~~~~
 	def exit(self):
 		QApplication.closeAllWindows()
 		QApplication.quit()
 
-		Core.isExiting(True)
-		Core.isRestarting(False)
+		Internal.isExiting(True)
+		Internal.isRestarting(False)
 
 
 	def restart(self):
 		self.exit()
 
-		Core.isExiting(True)
-		Core.isRestarting(True)
+		Internal.isExiting(True)
+		Internal.isRestarting(True)
+	# ~~~~~~~~~~~~~~~~~~~~~~~~
 

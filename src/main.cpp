@@ -1,16 +1,12 @@
 #include<require.hpp>
 #include<path.hpp>
-#include<startup.hpp>
-
 #include<python.hpp>
-#include<python_core.hpp>
+#include<python_internal.hpp>
 
 
 
 int main(int argC, char* argV[]){
 	Path::setup();
-	Startup::setup();
-
 
 	Python::setupPreConfig(argC, argV);
 	Python::setupConfig();

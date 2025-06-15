@@ -21,10 +21,10 @@ class Scripts_Window_Menu_Settings_Color(RFT_Object, QPushButton):
 
 
 		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
-		self.reload()
-
-		self.setFixedSize(70, 20)
+		self.setFixedSize(*self.parent.size)
 		self.setCursor(Qt.CursorShape.PointingHandCursor)
+		
+		self.reload()
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -51,10 +51,10 @@ class Scripts_Window_Menu_Settings_Color(RFT_Object, QPushButton):
 						func(self.parent.scope, k, v)
 
 					except:
-						win = self.parent.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.parent.scope.id} : {k}.callback()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.parent.callback = None
+						self.parent.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = f" : {k} : callback()"
+						)
 
 
 

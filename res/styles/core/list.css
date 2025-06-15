@@ -1,0 +1,24 @@
+
+QComboBox{
+	font-family: Dosis SemiBold;
+	font-size: 14px;
+
+	padding: 4px;
+
+	border: none;
+	border-radius: 3px;
+
+	color: white;
+	background-color: rgb(10, 10, 10);
+
+	selection-color: rgb(255, 255, 255);
+	selection-background-color: rgb(100, 50, 255);
+}
+
+QComboBox::drop-down{
+	background-color: rgb(10, 10, 10);
+}
+
+QComboBox::down-arrow{
+	border-right: 1px solid white;
+}

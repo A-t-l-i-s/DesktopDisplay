@@ -20,12 +20,12 @@ class Scripts_Window_Menu_Settings_Toggle(RFT_Object, QCheckBox):
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~
-		self.reload()
-		
+		# ~~~~~~~~~~~ Settings ~~~~~~~~~~~		
 		self.setCursor(Qt.CursorShape.PointingHandCursor)
 
 		self.setStyleSheet(Styles.core.toggle)
+
+		self.reload()
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -48,10 +48,10 @@ class Scripts_Window_Menu_Settings_Toggle(RFT_Object, QCheckBox):
 						func(self.parent.scope, k, v)
 
 					except:
-						win = self.parent.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.parent.scope.id} : {k}.callback()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.parent.callback = None
+						self.parent.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = f" : {k} : callback()"
+						)
 
 
 	def _triggered(self):

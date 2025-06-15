@@ -1,0 +1,18 @@
+
+
+QTextEdit{
+	color: rgb(255, 255, 255);
+	background-color: rgb(10, 10, 10);
+	
+	selection-color: rgb(255, 255, 255);
+	selection-background-color: rgb(100, 50, 255);
+
+	border: 1px solid rgb(20, 20, 20);
+	border-radius: 5px;
+
+	padding: 4px;
+
+	font-family: JetBrains Mono;
+	font-size: 12px;
+}
+

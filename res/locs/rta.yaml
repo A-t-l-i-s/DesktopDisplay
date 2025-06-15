@@ -1,0 +1,12 @@
+
+title: RTA
+icon: null
+
+settings:
+  inputRelay: Enable
+  inputRelayIp: Input Relay IP
+  inputRelayPort: Input Relay Port
+
+  outputRelay: Enable
+  outputRelayIp: Output Relay IP
+  outputRelayPort: Output Relay Port

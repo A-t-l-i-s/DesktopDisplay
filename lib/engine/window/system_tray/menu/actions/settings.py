@@ -38,7 +38,7 @@ class Window_SystemTray_Menu_Settings(RFT_Object, QAction):
 
 
 	def _triggered(self):
-		win = self.parent.parent.parent.settingsWindow
+		win = self.parent.parent.parent
 
 		if (self.isChecked()):
 			win.show()

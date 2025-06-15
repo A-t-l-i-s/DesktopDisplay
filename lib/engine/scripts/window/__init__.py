@@ -85,13 +85,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 
 	# ~~~~~~~~~~~ Reloading ~~~~~~~~~~
-	def reloadProperties(self, *, topmost:bool = None, transparent:bool = None, events:bool = None):
+	def reloadProperties(self, *, topmost:bool = None, events:bool = None):
 		# If default value isn't set then get the saved properties 
 		if (topmost is None):
 			topmost = self.window.topmost
-		
-		if (transparent is None):
-			transparent = self.window.transparent
 
 		if (events is None):
 			events = self.window.events
@@ -99,7 +96,7 @@ class Scripts_Window(RFT_Object, QMainWindow):
 
 		# Attributes
 		self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, True)
-		self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, transparent)
+		self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
 		self.setAttribute(Qt.WidgetAttribute.WA_NoChildEventsForParent, True)
 
 		# Flags
@@ -152,10 +149,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 					func(self.scope, event)
 
 				except:
-					win = self.scope.gui.parent
-
-					if (win.alert_disable_ignore(f"{self.scope.id} : moveEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-						self.scope.moveEvent = None
+					self.scope.printErr(
+						RFT_Exception.Traceback(),
+						uidEnd = " : moveEvent()"
+					)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -173,10 +170,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 					func(self.scope, event)
 
 				except:
-					win = self.scope.gui.parent
-
-					if (win.alert_disable_ignore(f"{self.scope.id} : resizeEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-						self.scope.resizeEvent = None
+					self.scope.printErr(
+						RFT_Exception.Traceback(),
+						uidEnd = " : resizeEvent()"
+					)
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -198,7 +195,7 @@ class Scripts_Window(RFT_Object, QMainWindow):
 				self.click = x, y
 
 			elif (btn == Qt.MouseButton.RightButton):
-				self.menuWidget.popup(curPos)
+				self.menuWidget.exec(curPos)
 				self.click = None
 
 
@@ -210,10 +207,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 						func(self.scope, event)
 
 					except:
-						win = self.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.scope.id} : mousePressEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.scope.mousePressEvent = None
+						self.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = " : mousePressEvent()"
+						)
 			# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -232,10 +229,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 						func(self.scope, event)
 
 					except:
-						win = self.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.scope.id} : mouseReleaseEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.scope.mouseReleaseEvent = None
+						self.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = " : mouseReleaseEvent()"
+						)
 			# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -265,10 +262,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 						func(self.scope, event)
 
 					except:
-						win = self.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.scope.id} : mouseMoveEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.scope.mouseMoveEvent = None
+						self.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = " : mouseMoveEvent()"
+						)
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -281,10 +278,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 						func(self.scope, event)
 
 					except:
-						win = self.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.scope.id} : keyPressEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.scope.keyPressEvent = None
+						self.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = " : keyPressEvent()"
+						)
 
 
 	def keyReleaseEvent(self, event):
@@ -295,10 +292,10 @@ class Scripts_Window(RFT_Object, QMainWindow):
 						func(self.scope, event)
 
 					except:
-						win = self.scope.gui.parent
-
-						if (win.alert_disable_ignore(f"{self.scope.id} : keyReleaseEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.scope.keyReleaseEvent = None
+						self.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = " : keyReleaseEvent()"
+						)
 	# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

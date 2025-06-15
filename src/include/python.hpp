@@ -2,7 +2,7 @@
 
 #include<require.hpp>
 #include<path.hpp>
-#include<python_core.hpp>
+#include<python_internal.hpp>
 
 
 
@@ -69,7 +69,7 @@ namespace Python{
 			// Config
 			config.write_bytecode = false;
 			config.optimization_level = 0;
-			config.program_name = (wchar_t*)PROGRAM_NAME;
+			config.program_name = NULL;
 			
 			config.home = NULL;
 			config.pythonpath_env = NULL;
@@ -112,14 +112,18 @@ namespace Python{
 
 			PyWideStringList_Append(&config.module_search_paths, L"res/lib");
 
+			#if defined(DEBUG) || defined(TASK)
+				PyWideStringList_Append(&config.module_search_paths, L"lib_debug");
+			#endif
+
 
 			// Prevent module paths from override
 			config.module_search_paths_set = true;
 
 
 			PyImport_AppendInittab(
-				"Core",
-				Python_Core::PyInit_Core
+				"Internal",
+				Python_Internal::PyInit_Internal
 			);
 
 
@@ -135,24 +139,6 @@ namespace Python{
 			mainModule = PyImport_AddModule("__main__");
 			mainGlobals = PyModule_GetDict(mainModule);
 			mainLocals = PyDict_New();
-			
-
-			{
-				#ifdef TASK
-					#define NAME "__DDTask__"
-				#else
-					#define NAME "__DDMain__"
-				#endif
-
-				PyDict_SetItemString(
-					mainGlobals,
-					"__name__",
-					Py_BuildValue(
-						"s",
-						NAME
-					)
-				);
-			}
 		}
 	}
 
@@ -166,118 +152,112 @@ namespace Python{
 
 
 	void runMain(){
-		#ifndef TASK
-			PyObject* mod = PyImport_ImportModuleEx(
-				"main",
-				Python::mainGlobals,
-				Python::mainLocals,
-				NULL
-			);
+		PyObject* mod = PyImport_ImportModuleEx(
+			"main",
+			Python::mainGlobals,
+			Python::mainLocals,
+			NULL
+		);
 
-			if (mod != NULL){
+		if (mod != NULL){
+			#if defined(TASK)
+				PyObject* func = PyObject_GetAttrString(mod, "task");
+
+				if (func != NULL){
+					if (PyCallable_Check(func)){
+						if (Python::argC > 1){
+							string pathStr = Python::argV[1];
+							fs::path path = fs::path(pathStr);
+
+							if (fs::is_regular_file(path)){
+								{
+									pid_t pid = getpid();
+									string pidStr = std::to_string(pid);
+
+									fs::path instPath = "insts";
+									instPath /= pidStr;
+
+									std::ofstream file(instPath, std::ios::binary | std::ios::out);
+
+									string name;
+
+									if (Python::argC > 2){
+										name = Python::argV[2];
+									} else {
+										name = path.generic_string();
+									}
+
+									time_t t = time(NULL);
+									string timeStr = std::to_string(t);
+
+
+									file << name;
+									file << "\x01";
+									file << pidStr;
+									file << "\x01";
+									file << timeStr;
+
+									file.close();
+								}
+
+								{
+									PyObject* arg = Py_BuildValue(
+										"s",
+										path.generic_string().c_str()
+									);
+
+									// Call function
+									PyObject* result = PyObject_CallOneArg(
+										func,
+										arg
+									);
+
+									// Free arg
+									Py_DECREF(arg);
+
+									if (result == NULL){
+										#ifdef DEBUG
+											PyErr_Print();
+										#endif
+									}
+								}
+							}
+						}
+					}
+
+					Py_DECREF(func);
+				}
+			#else
 				PyObject* func = PyObject_GetAttrString(mod, "main");
 
+				if (func != NULL){
+					if (PyCallable_Check(func)){
+						PyObject* result = PyObject_CallNoArgs(func);
 
-				if (PyCallable_Check(func)){
-					PyObject* result = PyObject_CallNoArgs(func);
-
-					// Check if script raised any exception
-					if (result == NULL){
-						// Print exception
-						PyErr_Print();
+						if (result == NULL){
+							#ifdef DEBUG
+								PyErr_Print();
+							#endif
+						}
 					}
+
+					Py_DECREF(func);
 				}
+			#endif
 
-				Py_DECREF(mod);
-				Py_DECREF(func);
+			Py_DECREF(mod);
 
-			} else {
+		} else {
+			#ifdef DEBUG
 				PyErr_Print();
-			}
-		#else
-			if (Python::argC > 1){
-				string pathStr = Python::argV[1];
-				fs::path path = fs::path(pathStr);
-
-				if (fs::is_regular_file(path)){
-					// Open file
-					FILE* file = _Py_fopen_obj(
-						Py_BuildValue("s", path.generic_string().c_str()),
-						"rb"
-					);
-
-
-					{
-						pid_t pid = getpid();
-						string pidStr = std::to_string(pid);
-
-						fs::path instPath = "insts";
-						instPath /= pidStr;
-
-						std::ofstream file(instPath, std::ios::binary | std::ios::out);
-
-						string name;
-
-						if (Python::argC > 2){
-							name = Python::argV[2];
-						} else {
-							name = path.generic_string();
-						}
-
-						time_t t = time(NULL);
-						string timeStr = std::to_string(t);
-
-
-						file << name;
-						file << "\x01";
-						file << pidStr;
-						file << "\x01";
-						file << timeStr;
-
-						file.close();
-					}
-
-
-					if (file != NULL){
-						// Compile script
-						PyObject* result = PyRun_FileExFlags(
-							file,
-							path.generic_string().c_str(),
-							Py_file_input,
-							Python::mainGlobals,
-							Python::mainLocals,
-							false,
-							NULL
-						);
-
-
-						// Close file
-						fclose(file);
-						Py_DECREF(file);
-
-
-						// Check if script raised any exception
-						if (not result){
-							// Print exception
-							PyErr_Print();
-						}
-					}
-				}
-			}
-		#endif
+			#endif
+		}
 	}
 
 
 	void runRestart(){
-		if (Python_Core::restarting){
-			#ifndef TASK
-				execve(
-					PROGRAM_FILE,
-					Python::argV,
-					NULL
-				);
-
-			#else
+		if (Python_Internal::restarting){
+			#if defined(TASK)
 				string fName = "";
 				string name = PROGRAM_FILE_TASK;
 
@@ -286,23 +266,31 @@ namespace Python{
 
 					if (Python::argC > 2){
 						name = "\"" + string(Python::argV[2]) + "\"";
-					} else {
-						name = PROGRAM_FILE_TASK;
 					}
 				}
 
 
-				char* argVNew[4] = {
+				char* argVNew[argC] = {
 					Python::argV[0],
 					fName.data(),
-					name.data(),
-					NULL
+					name.data()
 				};
+
+				for (uint16_t i = 3; i < argC; i++){
+					argVNew[i] = argV[i];
+				}
 
 
 				execve(
 					PROGRAM_FILE,
 					argVNew,
+					NULL
+				);
+
+			#else
+				execve(
+					PROGRAM_FILE,
+					Python::argV,
 					NULL
 				);
 			#endif

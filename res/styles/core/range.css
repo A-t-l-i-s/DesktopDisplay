@@ -1,0 +1,22 @@
+
+QSlider{
+	height: 20px;
+}
+
+QSlider::groove:horizontal{
+	background: white;
+
+	height: 2px;
+
+	margin: 12px 0;
+}
+
+QSlider::handle:horizontal{
+	background-color: white;
+
+	width: 12px;
+	margin: -6px 0;
+
+	border: 1px solid rgb(150, 150, 150);
+	border-radius: 4px;
+}

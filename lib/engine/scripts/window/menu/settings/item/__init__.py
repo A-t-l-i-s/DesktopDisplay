@@ -3,6 +3,8 @@ from engine.require import *
 from .widgets.input import *
 from .widgets.color import *
 from .widgets.toggle import *
+from .widgets.range import *
+from .widgets.list import *
 
 
 
@@ -21,6 +23,8 @@ class Scripts_Window_Menu_Settings_Item(RFT_Object, QWidgetAction):
 
 		# ~~~~~~~~~~~ Variables ~~~~~~~~~~
 		self.parent = parent
+
+		self.size = (120, 23)
 
 		self.scope = self.parent.parent.parent.scope
 		self.locs = self.scope.locs
@@ -68,28 +72,37 @@ class Scripts_Window_Menu_Settings_Item(RFT_Object, QWidgetAction):
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-		if (self.type == self.scope.SETTINGS_COLOR):
+		if (self.type == self.scope.SETTINGS.COLOR):
 			# ~~~~~~~~~ Color Widget ~~~~~~~~~
-			if (isinstance(self.value, list)):
-				if (len(self.value) == 3):
-					self.value += [255]
-
-				if (len(self.value) == 4):
-					self.widget = Scripts_Window_Menu_Settings_Color(self)
-					self.layout.addWidget(self.widget)
+			self.widget = Scripts_Window_Menu_Settings_Color(self)
+			self.layout.addWidget(self.widget)
 			# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-		elif (self.type == self.scope.SETTINGS_TOGGLE):
+		elif (self.type == self.scope.SETTINGS.TOGGLE):
 			# ~~~~~~~~~ Toggle Widget ~~~~~~~~
 			self.widget = Scripts_Window_Menu_Settings_Toggle(self)
 			self.layout.addWidget(self.widget)
 			# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-		elif (self.type == self.scope.SETTINGS_INPUT):
+		elif (self.type == self.scope.SETTINGS.INPUT):
 			# ~~~~~~~~~ Input Widget ~~~~~~~~~
 			self.widget = Scripts_Window_Menu_Settings_Input(self)
+			self.layout.addWidget(self.widget)
+			# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+		elif (self.type == self.scope.SETTINGS.RANGE):
+			# ~~~~~~~~~ Range Widget ~~~~~~~~~
+			self.widget = Scripts_Window_Menu_Settings_Range(self)
+			self.layout.addWidget(self.widget)
+			# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+		elif (self.type == self.scope.SETTINGS.LIST):
+			# ~~~~~~~~ Options Widget ~~~~~~~~
+			self.widget = Scripts_Window_Menu_Settings_List(self)
 			self.layout.addWidget(self.widget)
 			# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

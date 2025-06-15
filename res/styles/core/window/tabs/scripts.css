@@ -1,0 +1,57 @@
+
+QFrame#main{
+	border: 1px solid rgb(50, 50, 50);
+	border-radius: 7px;
+
+	background-color: rgb(40, 40, 40);
+}
+
+
+QLabel#title{
+	color: white;
+	background-color: transparent;
+
+	font-family: Dosis ExtraBold;
+	font-size: 17px;
+
+	padding: 1px;
+
+	border: none;
+	border-radius: 6px;
+}
+
+QLabel#icon{
+	background-color: rgb(30, 30, 30);
+
+	border: none;
+	border-radius: 6px;
+
+	padding: 2px;
+}
+
+
+QPushButton{
+	font-family: Dosis ExtraBold;
+	font-size: 15px;
+
+	color: white;
+	background-color: rgb(70, 70, 70);
+
+	border: none;
+	border-radius: 4px;
+
+	padding: 7px 14px;
+}
+
+QPushButton#remove:hover{
+	background-color: rgb(170, 90, 90);
+}
+
+QPushButton#console:hover{
+	background-color: rgb(90, 90, 200);
+}
+
+QPushButton#duplicate:hover{
+	background-color: rgb(90, 150, 90);
+}
+

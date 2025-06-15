@@ -76,20 +76,19 @@ class Scripts_Window_Menu_Move_Manual_Width(RFT_Object, QWidgetAction):
 
 		if (text):
 			try:
-				value = ast.literal_eval(text)
+				value = int(text)
 			
 			except:
 				...
 
 			else:
-				if (isinstance(value, int)):
-					self.window.width = value
-					self.valueWidget.setPlaceholderText(str(value))
+				self.window.width = value
+				self.valueWidget.setPlaceholderText(str(value))
 
-					win = self.parent.parent.parent
-					win.resize(value, win.height())
+				win = self.parent.parent.parent.parent
+				win.resize(value, win.height())
 
-					self.reload()
+				self.reload()
 
 
 		self.valueWidget.setText(None)

@@ -1,5 +1,5 @@
 import sys
-sys.path.append("G:/RFTLib/src")
+sys.path.append("/RFTLib/src")
 
 import io
 import os
@@ -8,9 +8,11 @@ import ast
 import time
 import json
 import math
+import uuid
 import yaml
 import shlex
 import types
+import redis
 import base64
 import ctypes
 import socket
@@ -28,7 +30,8 @@ import collections
 
 from pathlib import Path
 
-import Core
+import Internal
+
 
 
 # ~~~~~~~~~~ Qt6 ~~~~~~~~~
@@ -52,6 +55,7 @@ from PyQt6.QtGui import (
 	QScreen,
 	
 	QFont,
+	QTextCharFormat,
 )
 
 from PyQt6.QtCore import (
@@ -105,13 +109,16 @@ from PyQt6.QtWebEngineWidgets import QWebEngineView
 
 # ~~~~~~~~ RFTLib ~~~~~~~~
 from RFTLib.Core.Object import *
+from RFTLib.Core.Enum import *
 from RFTLib.Core.Buffer import *
 from RFTLib.Core.Random import *
 from RFTLib.Core.Structure import *
 from RFTLib.Core.Exception import *
 
+from RFTLib.Core.Graphic.Text import *
+from RFTLib.Core.Graphic.Color import *
+
 from RFTLib.Core.Table import *
-from RFTLib.Core.Server import *
 from RFTLib.Core.Script import *
 from RFTLib.Core.Resource import *
 # ~~~~~~~~~~~~~~~~~~~~~~~~

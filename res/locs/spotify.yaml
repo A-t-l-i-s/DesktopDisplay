@@ -1,0 +1,15 @@
+
+title: Spotify
+icon: icon
+
+settings:
+  margin: Margin
+  size: Size
+  left: Left
+
+  clientId: Client ID
+  secretId: Secret ID
+  redirectUri: Redirect Uri
+
+  dropShadow: Drop Shadow
+  dropShadowRadius: Drop Shadow Radius

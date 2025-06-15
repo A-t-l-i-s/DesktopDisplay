@@ -76,20 +76,19 @@ class Scripts_Window_Menu_Move_Manual_X(RFT_Object, QWidgetAction):
 
 		if (text):
 			try:
-				value = ast.literal_eval(text)
+				value = int(text)
 			
 			except:
 				...
 
 			else:
-				if (isinstance(value, int)):
-					self.window.x = value
-					self.valueWidget.setPlaceholderText(str(value))
+				self.window.x = value
+				self.valueWidget.setPlaceholderText(str(value))
 
-					win = self.parent.parent.parent
-					win.move(value, win.y())
+				win = self.parent.parent.parent.parent
+				win.move(value, win.y())
 
-					self.reload()
+				self.reload()
 
 
 		self.valueWidget.setText(None)

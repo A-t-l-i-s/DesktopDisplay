@@ -1,4 +1,5 @@
 from engine.require import *
+from engine.scripts import *
 
 from .menu import *
 
@@ -19,6 +20,8 @@ class Window_SystemTray(RFT_Object, QSystemTrayIcon):
 
 		# ~~~~~~~~~~~ Variables ~~~~~~~~~~
 		self.parent = parent
+
+		self.notif = Scripts.consoleNotif
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -38,6 +41,32 @@ class Window_SystemTray(RFT_Object, QSystemTrayIcon):
 		# ~~~~~~~~~~~~ Events ~~~~~~~~~~~~
 		self.activated.connect(self._activated)
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+		# ~~~~~~~~~ Timer ~~~~~~~~
+		self.timer = QTimer(self)
+		self.timer.timeout.connect(self.reload)
+		self.timer.start(1000 // 10)
+		# ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+	def reload(self):
+		tabs = self.parent.canvas.tabsWidget
+		tabsC = tabs.consoleWidget
+
+		if (Scripts.consoleNotif):
+			if (tabs.currentWidget() != tabsC or not tabs.parent.isVisible()):
+				if (not self.notif):
+					self.setIcon(Icons.core.icon_notif)
+					tabs.setTabIcon(tabsC.index, Icons.core.console_notif)
+					self.notif = True
+
+		else:
+			if (self.notif):
+				self.setIcon(Icons.core.icon)
+				tabs.setTabIcon(tabsC.index, Icons.core.console)
+				self.notif = False
 
 
 

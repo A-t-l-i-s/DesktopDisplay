@@ -1,0 +1,16 @@
+
+QLineEdit{
+	font-family: Dosis SemiBold;
+	font-size: 14px;
+
+	padding: 1px;
+
+	border: none;
+	border-radius: 3px;
+
+	color: white;
+	background-color: rgb(0, 0, 0);
+	
+	selection-color: rgb(255, 255, 255);
+	selection-background-color: rgb(100, 50, 255);
+}

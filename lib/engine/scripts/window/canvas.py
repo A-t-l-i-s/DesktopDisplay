@@ -18,6 +18,15 @@ class Scripts_Window_Canvas(RFT_Object, QWidget):
 		# ~~~~~~~ Variables ~~~~~~
 		self.parent = parent
 
+		self.black = QColor(0, 0, 0, 255)
+		self.transparent = QColor(0, 0, 0, 0)
+
+		self.borderColor = QColor(10, 10, 10, 200)
+		self.backgroundColor = QColor(0, 0, 0, 1)
+
+		self.textColor = QColor(255, 255, 255)
+		self.textFont = QFont("Dosis", 11, 600, False)
+
 		self.scope = self.parent.scope
 		# ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -50,55 +59,56 @@ class Scripts_Window_Canvas(RFT_Object, QWidget):
 			painter.begin(self)
 
 
-			# Erase background
-			if (not self.scope.window.transparent):
-				painter.fillRect(0, 0, w, h, QColor(0, 0, 0))
-
-
-			# ~~~~ Draw Function ~~~~~
 			if (not self.scope.window.hidden):
+				# Erase background
+				if (not self.scope.window.transparent):
+					painter.fillRect(0, 0, w, h, self.black)
+
+
+				# ~~~~ Draw Function ~~~~~
 				if ((func := self.scope.drawEvent) is not None):
 					try:
 						func(self.scope, painter)
 
 					except:
-						win = self.scope.gui.parent
-						
-						if (win.alert_disable_ignore(f"{self.scope.id} : drawEvent()").wait() != win.alertWindow.ALERT_IGNORE):
-							self.scope.drawEvent = None
-			# ~~~~~~~~~~~~~~~~~~~~~~~~
+						self.scope.printErr(
+							RFT_Exception.Traceback(),
+							uidEnd = " : drawEvent()"
+						)
+				# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-			# Reset Pen/Brush
-			painter.setPen(QColor(0, 0, 0, 0))
-			painter.setBrush(QColor(0, 0, 0, 0))
 
 
 			# ~~~~~ Editing Mode ~~~~~
 			if (self.scope.inst.editing):
+				# Reset Pen/Brush
+				painter.setPen(self.transparent)
+				painter.setBrush(self.transparent)
+
+				painter.setRenderHint(QPainter.RenderHint.Antialiasing | QPainter.RenderHint.TextAntialiasing)
+				painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
+
+
 				# Make Window Clickable
 				painter.fillRect(
 					0, 0,
 					w, h,
-					QColor(0, 0, 0, 1)
+					self.backgroundColor
 				)
-
-				# Border color
-				c = QColor(10, 10, 10, 200)
-
 
 				# Top Bar
 				painter.fillRect(
 					0, 0,
 					w, 20,
-					c
+					self.borderColor
 				)
 
 
 				# Border Pen
 				painter.setPen(
 					QPen(
-						c,
+						self.borderColor,
 						3
 					)
 				)
@@ -111,8 +121,8 @@ class Scripts_Window_Canvas(RFT_Object, QWidget):
 
 
 				# Title Color/Font
-				painter.setPen(QColor(255, 255, 255))
-				painter.setFont(QFont("Dosis", 11, 600, False))
+				painter.setPen(self.textColor)
+				painter.setFont(self.textFont)
 
 				# Fetch window title
 				if ((t := self.scope.locs.get("title")) is not None):
@@ -120,6 +130,10 @@ class Scripts_Window_Canvas(RFT_Object, QWidget):
 
 				else:
 					title = self.scope.id
+
+				# Edit title
+				if (self.scope.duplicate):
+					title += " (Duplicate)"
 
 				# Draw Text		
 				painter.drawText(
